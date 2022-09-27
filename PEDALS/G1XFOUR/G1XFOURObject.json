@@ -1,0 +1,5642 @@
+[
+    {
+        "FX": {
+            "id": 0,
+            "n": "Bypass",
+            "np": 0,
+            "ns": 1,
+            "fn": ""
+        },
+        "P": []
+    },
+    {
+        "FX": {
+            "id": 16777232,
+            "n": "Comp",
+            "np": 4,
+            "ns": 1,
+            "fn": "COMP.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 10,
+                "n": "Sense",
+                "p": false,
+                "mdef": 6
+            },
+            {
+                "mmax": 1,
+                "n": "ATTCK",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 10,
+                "n": "Tone",
+                "p": false,
+                "mdef": 6
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 16777248,
+            "n": "RackComp",
+            "np": 4,
+            "ns": 1,
+            "fn": "RACKCOMP.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 50,
+                "n": "THRSH",
+                "p": false,
+                "mdef": 40
+            },
+            {
+                "mmax": 9,
+                "n": "Ratio",
+                "p": false,
+                "mdef": 5
+            },
+            {
+                "mmax": 9,
+                "n": "ATTCK",
+                "p": false,
+                "mdef": 6
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 16777264,
+            "n": "SlowATTCK",
+            "np": 4,
+            "ns": 1,
+            "fn": "SLWATK.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 49,
+                "n": "Time",
+                "p": false,
+                "mdef": 20
+            },
+            {
+                "mmax": 10,
+                "n": "Curve",
+                "p": false,
+                "mdef": 10
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 16777280,
+            "n": "ZNR",
+            "np": 4,
+            "ns": 1,
+            "fn": "ZNR.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "DETCT",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 100,
+                "n": "THRSH",
+                "p": false,
+                "mdef": 30
+            },
+            {
+                "mmax": 100,
+                "n": "Decay",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 16777296,
+            "n": "MuteSW",
+            "np": 4,
+            "ns": 1,
+            "fn": "MUTESW.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Edge",
+                "p": false,
+                "mdef": 13
+            },
+            {
+                "mmax": 100,
+                "n": "Speed",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 1,
+                "n": "INVRT",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 2,
+                "n": "ON/OFF",
+                "p": false,
+                "mdef": 1
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 16777312,
+            "n": "GrayComp",
+            "np": 4,
+            "ns": 1,
+            "fn": "GRAYCOMP.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "SUSTN",
+                "p": false,
+                "mdef": 63
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 88
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 16777328,
+            "n": "NoiseGate",
+            "np": 4,
+            "ns": 1,
+            "fn": "N_GATE.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "DETCT",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 100,
+                "n": "THRSH",
+                "p": false,
+                "mdef": 54
+            },
+            {
+                "mmax": 100,
+                "n": "Decay",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 16777344,
+            "n": "OptComp",
+            "np": 4,
+            "ns": 1,
+            "fn": "OPTCOMP.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 10,
+                "n": "Drive",
+                "p": false,
+                "mdef": 7
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 60
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 25165840,
+            "n": "BlackOpt",
+            "np": 4,
+            "ns": 1,
+            "fn": "BLACKOPT.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Comp",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 76
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 25165856,
+            "n": "LMT-76",
+            "np": 4,
+            "ns": 1,
+            "fn": "LMT1176.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 80,
+                "n": "Input",
+                "p": false,
+                "mdef": 40
+            },
+            {
+                "mmax": 3,
+                "n": "Ratio",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 60,
+                "n": "REL",
+                "p": false,
+                "mdef": 10
+            },
+            {
+                "mmax": 80,
+                "n": "Output",
+                "p": false,
+                "mdef": 38
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 33554448,
+            "n": "AutoWah",
+            "np": 4,
+            "ns": 1,
+            "fn": "AUTOWAH.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "Mode",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 9,
+                "n": "Sense",
+                "p": false,
+                "mdef": 7
+            },
+            {
+                "mmax": 10,
+                "n": "RESO",
+                "p": false,
+                "mdef": 8
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 33554464,
+            "n": "Resonance",
+            "np": 4,
+            "ns": 1,
+            "fn": "RESONANC.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "Mode",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 9,
+                "n": "Sense",
+                "p": false,
+                "mdef": 4
+            },
+            {
+                "mmax": 10,
+                "n": "RESO",
+                "p": false,
+                "mdef": 8
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 33554480,
+            "n": "Cry",
+            "np": 4,
+            "ns": 1,
+            "fn": "CRY.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 9,
+                "n": "Range",
+                "p": false,
+                "mdef": 6
+            },
+            {
+                "mmax": 10,
+                "n": "RESO",
+                "p": false,
+                "mdef": 8
+            },
+            {
+                "mmax": 19,
+                "n": "Sense",
+                "p": false,
+                "mdef": 16
+            },
+            {
+                "mmax": 100,
+                "n": "BAL",
+                "p": false,
+                "mdef": 100
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 33554496,
+            "n": "SeqFLTR",
+            "np": 4,
+            "ns": 1,
+            "fn": "SEQFLTR.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 6,
+                "n": "Step",
+                "p": false,
+                "mdef": 6
+            },
+            {
+                "mmax": 7,
+                "n": "PTTRN",
+                "p": false,
+                "mdef": 6
+            },
+            {
+                "mmax": 77,
+                "n": "Speed",
+                "p": false,
+                "mdef": 25
+            },
+            {
+                "mmax": 10,
+                "n": "RESO",
+                "p": false,
+                "mdef": 10
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 33554513,
+            "n": "Gt GEQ",
+            "np": 7,
+            "ns": 2,
+            "fn": "GT_GEQ1U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 48,
+                "n": "160",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 48,
+                "n": "400",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 48,
+                "n": "800",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 48,
+                "n": "3.2k",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 48,
+                "n": "6.4k",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 48,
+                "n": "12k",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 33554516,
+            "n": "Gt GEQ 7",
+            "np": 8,
+            "ns": 2,
+            "fn": "GTGEQ71U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 48,
+                "n": "100",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 48,
+                "n": "200",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 48,
+                "n": "400",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 48,
+                "n": "800",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 48,
+                "n": "1.6k",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 48,
+                "n": "3.2k",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 48,
+                "n": "6.4k",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 33554529,
+            "n": "St Gt GEQ",
+            "np": 7,
+            "ns": 2,
+            "fn": "STGTGE1U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 48,
+                "n": "160",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 48,
+                "n": "400",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 48,
+                "n": "800",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 48,
+                "n": "3.2k",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 48,
+                "n": "6.4k",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 48,
+                "n": "12k",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 33554544,
+            "n": "ParaEQ",
+            "np": 4,
+            "ns": 1,
+            "fn": "PARAEQ.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 30,
+                "n": "FREQ",
+                "p": false,
+                "mdef": 8
+            },
+            {
+                "mmax": 67,
+                "n": "Q",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 48,
+                "n": "Gain",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 33554576,
+            "n": "RndmFLTR",
+            "np": 4,
+            "ns": 1,
+            "fn": "RNDMFLTR.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 2,
+                "n": "Type",
+                "p": false,
+                "mdef": 2
+            },
+            {
+                "mmax": 77,
+                "n": "Speed",
+                "p": false,
+                "mdef": 34
+            },
+            {
+                "mmax": 100,
+                "n": "BAL",
+                "p": false,
+                "mdef": 90
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 33554592,
+            "n": "LowPassFL",
+            "np": 4,
+            "ns": 1,
+            "fn": "LOWPASSF.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "FREQ",
+                "p": false,
+                "mdef": 56
+            },
+            {
+                "mmax": 201,
+                "n": "Sense",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 21,
+                "n": "RESO",
+                "p": false,
+                "mdef": 3
+            },
+            {
+                "mmax": 100,
+                "n": "BAL",
+                "p": false,
+                "mdef": 100
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 33554608,
+            "n": "Exciter",
+            "np": 4,
+            "ns": 1,
+            "fn": "EXCITER.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Bass",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "Treble",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            },
+            {
+                "mmax": 1,
+                "n": "ON/OFF",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 33554624,
+            "n": "Step",
+            "np": 4,
+            "ns": 1,
+            "fn": "STEP.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 60
+            },
+            {
+                "mmax": 78,
+                "n": "Rate",
+                "p": false,
+                "mdef": 25
+            },
+            {
+                "mmax": 10,
+                "n": "RESO",
+                "p": false,
+                "mdef": 8
+            },
+            {
+                "mmax": 10,
+                "n": "Shape",
+                "p": false,
+                "mdef": 10
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 33554640,
+            "n": "LFO FLTR",
+            "np": 4,
+            "ns": 1,
+            "fn": "LFO_FLTR.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 77,
+                "n": "Rate",
+                "p": false,
+                "mdef": 57
+            },
+            {
+                "mmax": 10,
+                "n": "RESO",
+                "p": false,
+                "mdef": 8
+            },
+            {
+                "mmax": 3,
+                "n": "Wave",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50331664,
+            "n": "TS Drive",
+            "np": 4,
+            "ns": 1,
+            "fn": "TS_DRIVE.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 74
+            },
+            {
+                "mmax": 1,
+                "n": "Boost",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 57
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 82
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50331680,
+            "n": "EP Stomp",
+            "np": 4,
+            "ns": 1,
+            "fn": "EP_STOMP.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 35
+            },
+            {
+                "mmax": 20,
+                "n": "Bass",
+                "p": false,
+                "mdef": 10
+            },
+            {
+                "mmax": 20,
+                "n": "Treble",
+                "p": false,
+                "mdef": 8
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 62
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50331696,
+            "n": "RC Boost",
+            "np": 4,
+            "ns": 1,
+            "fn": "RCBOOST.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 58
+            },
+            {
+                "mmax": 100,
+                "n": "Bass",
+                "p": false,
+                "mdef": 48
+            },
+            {
+                "mmax": 100,
+                "n": "Treble",
+                "p": false,
+                "mdef": 52
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 48
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50331712,
+            "n": "GoldDrive",
+            "np": 4,
+            "ns": 1,
+            "fn": "GOLD_DRV.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 69
+            },
+            {
+                "mmax": 100,
+                "n": "Bass",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Treble",
+                "p": false,
+                "mdef": 56
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 43
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50331728,
+            "n": "SweetDrv",
+            "np": 4,
+            "ns": 1,
+            "fn": "SWEETDRV.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 78
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Focus",
+                "p": false,
+                "mdef": 67
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 62
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50331744,
+            "n": "DYN Drive",
+            "np": 4,
+            "ns": 1,
+            "fn": "DYNDRIVE.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 78
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 67
+            },
+            {
+                "mmax": 1,
+                "n": "Mode",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 46
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50331760,
+            "n": "RedCrunch",
+            "np": 4,
+            "ns": 1,
+            "fn": "REDCRUNC.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 68
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 47
+            },
+            {
+                "mmax": 100,
+                "n": "PRSNC",
+                "p": false,
+                "mdef": 48
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 61
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50331776,
+            "n": "MetalWRLD",
+            "np": 4,
+            "ns": 1,
+            "fn": "MTLWRLD.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 60
+            },
+            {
+                "mmax": 100,
+                "n": "Bass",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Treble",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50331792,
+            "n": "TB MK1.5",
+            "np": 4,
+            "ns": 1,
+            "fn": "TB_MK15.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "ATTCK",
+                "p": false,
+                "mdef": 90
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 1,
+                "n": "Color",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 92
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50331808,
+            "n": "OctFuzz",
+            "np": 4,
+            "ns": 1,
+            "fn": "OCTFUZZ.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Boost",
+                "p": false,
+                "mdef": 65
+            },
+            {
+                "mmax": 1,
+                "n": "Color",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 68
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50331824,
+            "n": "SpotBoost",
+            "np": 4,
+            "ns": 1,
+            "fn": "SPTBOOST.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Boost",
+                "p": false,
+                "mdef": 35
+            },
+            {
+                "mmax": 20,
+                "n": "Bass",
+                "p": false,
+                "mdef": 10
+            },
+            {
+                "mmax": 20,
+                "n": "Treble",
+                "p": false,
+                "mdef": 8
+            },
+            {
+                "mmax": 1,
+                "n": "ON/OFF",
+                "p": false,
+                "mdef": 1
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50331840,
+            "n": "Aco.Sim",
+            "np": 4,
+            "ns": 1,
+            "fn": "ACOSIM.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Top",
+                "p": false,
+                "mdef": 80
+            },
+            {
+                "mmax": 100,
+                "n": "Body",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50331856,
+            "n": "NYC Muff",
+            "np": 4,
+            "ns": 1,
+            "fn": "NYC_MUFF.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "SUSTN",
+                "p": false,
+                "mdef": 70
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 55
+            },
+            {
+                "mmax": 100,
+                "n": "BAL",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 58
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50331872,
+            "n": "HG THRTTL",
+            "np": 4,
+            "ns": 1,
+            "fn": "BGTHRTTL.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 78
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 56
+            },
+            {
+                "mmax": 100,
+                "n": "MdCut",
+                "p": false,
+                "mdef": 46
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 54
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50331888,
+            "n": "BG GRID",
+            "np": 4,
+            "ns": 1,
+            "fn": "BG_GRID.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 68
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "BAL",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 74
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50331936,
+            "n": "DIST 1",
+            "np": 4,
+            "ns": 1,
+            "fn": "DIST_1.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 61
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 41
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 1,
+                "n": "Comp",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50331952,
+            "n": "Squeak",
+            "np": 4,
+            "ns": 1,
+            "fn": "SQUEAK.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 47
+            },
+            {
+                "mmax": 100,
+                "n": "FLTR",
+                "p": false,
+                "mdef": 60
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 79
+            },
+            {
+                "mmax": 100,
+                "n": "DryMx",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50331968,
+            "n": "UpOctBSTR",
+            "np": 4,
+            "ns": 1,
+            "fn": "UPOCTBST.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "UpOct",
+                "p": false,
+                "mdef": 65
+            },
+            {
+                "mmax": 100,
+                "n": "DryMx",
+                "p": false,
+                "mdef": 47
+            },
+            {
+                "mmax": 100,
+                "n": "Bottom",
+                "p": false,
+                "mdef": 75
+            },
+            {
+                "mmax": 100,
+                "n": "PRSNC",
+                "p": false,
+                "mdef": 70
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50331984,
+            "n": "OutputBST",
+            "np": 4,
+            "ns": 1,
+            "fn": "OUT_BST.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 9,
+                "n": "Range",
+                "p": false,
+                "mdef": 4
+            },
+            {
+                "mmax": 100,
+                "n": "Boost",
+                "p": false,
+                "mdef": 30
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50332000,
+            "n": "DIST Plus",
+            "np": 4,
+            "ns": 1,
+            "fn": "DISTPLUS.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 70
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 100,
+                "n": "DryMx",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 2,
+                "n": "Comp",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50332016,
+            "n": "Zen O.DRV",
+            "np": 4,
+            "ns": 1,
+            "fn": "ZEN_DRV.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 70
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 60
+            },
+            {
+                "mmax": 100,
+                "n": "Voice",
+                "p": false,
+                "mdef": 80
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 70
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 50332048,
+            "n": "VioletDST",
+            "np": 4,
+            "ns": 1,
+            "fn": "VIOLETDS.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 70
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 80
+            },
+            {
+                "mmax": 2,
+                "n": "Voice",
+                "p": false,
+                "mdef": 2
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 70
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 67108881,
+            "n": "MS 800",
+            "np": 7,
+            "ns": 2,
+            "fn": "MS800_1U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "Input",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 100,
+                "n": "Bass",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "MID",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Treble",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "PRSNC",
+                "p": false,
+                "mdef": 30
+            },
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 70
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 70
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 67108889,
+            "n": "MS 1959",
+            "np": 7,
+            "ns": 2,
+            "fn": "MS19591U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Bass",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "MID",
+                "p": false,
+                "mdef": 70
+            },
+            {
+                "mmax": 100,
+                "n": "Treble",
+                "p": false,
+                "mdef": 60
+            },
+            {
+                "mmax": 100,
+                "n": "PRSNC",
+                "p": false,
+                "mdef": 40
+            },
+            {
+                "mmax": 101,
+                "n": "Input1",
+                "p": false,
+                "mdef": 61
+            },
+            {
+                "mmax": 101,
+                "n": "Input2",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 67108891,
+            "n": "MS 45os",
+            "np": 7,
+            "ns": 2,
+            "fn": "MS45OS1U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Bass",
+                "p": false,
+                "mdef": 30
+            },
+            {
+                "mmax": 100,
+                "n": "MID",
+                "p": false,
+                "mdef": 70
+            },
+            {
+                "mmax": 100,
+                "n": "Treble",
+                "p": false,
+                "mdef": 65
+            },
+            {
+                "mmax": 100,
+                "n": "PRSNC",
+                "p": false,
+                "mdef": 30
+            },
+            {
+                "mmax": 101,
+                "n": "Input1",
+                "p": false,
+                "mdef": 61
+            },
+            {
+                "mmax": 101,
+                "n": "Input2",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 67108897,
+            "n": "FD TWNR",
+            "np": 8,
+            "ns": 2,
+            "fn": "FD_TWR1U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 90,
+                "n": "Bass",
+                "p": false,
+                "mdef": 38
+            },
+            {
+                "mmax": 90,
+                "n": "MID",
+                "p": false,
+                "mdef": 40
+            },
+            {
+                "mmax": 90,
+                "n": "Treble",
+                "p": false,
+                "mdef": 35
+            },
+            {
+                "mmax": 1,
+                "n": "BRGHT",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 90,
+                "n": "Gain",
+                "p": false,
+                "mdef": 30
+            },
+            {
+                "mmax": 90,
+                "n": "VOL",
+                "p": false,
+                "mdef": 70
+            },
+            {
+                "mmax": 90,
+                "n": "Depth",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "Speed",
+                "p": false,
+                "mdef": 40
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 67108904,
+            "n": "FD B-MAN",
+            "np": 7,
+            "ns": 2,
+            "fn": "FDBMAN1U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "Input",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 110,
+                "n": "Bass",
+                "p": false,
+                "mdef": 30
+            },
+            {
+                "mmax": 110,
+                "n": "MID",
+                "p": false,
+                "mdef": 90
+            },
+            {
+                "mmax": 110,
+                "n": "Treble",
+                "p": false,
+                "mdef": 40
+            },
+            {
+                "mmax": 110,
+                "n": "PRSNC",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 110,
+                "n": "Gain",
+                "p": false,
+                "mdef": 30
+            },
+            {
+                "mmax": 110,
+                "n": "VOL",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 67108908,
+            "n": "FD DLXR",
+            "np": 7,
+            "ns": 2,
+            "fn": "FDDLXR1U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "Input",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 90,
+                "n": "Bass",
+                "p": false,
+                "mdef": 33
+            },
+            {
+                "mmax": 90,
+                "n": "Treble",
+                "p": false,
+                "mdef": 55
+            },
+            {
+                "mmax": 90,
+                "n": "Gain",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 90,
+                "n": "VOL",
+                "p": false,
+                "mdef": 90
+            },
+            {
+                "mmax": 90,
+                "n": "Depth",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "Speed",
+                "p": false,
+                "mdef": 40
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 67108909,
+            "n": "FD MASTER",
+            "np": 6,
+            "ns": 2,
+            "fn": "FDMSTR1U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 90,
+                "n": "Gain",
+                "p": false,
+                "mdef": 40
+            },
+            {
+                "mmax": 90,
+                "n": "Bass",
+                "p": false,
+                "mdef": 60
+            },
+            {
+                "mmax": 90,
+                "n": "MID",
+                "p": false,
+                "mdef": 60
+            },
+            {
+                "mmax": 90,
+                "n": "Treble",
+                "p": false,
+                "mdef": 60
+            },
+            {
+                "mmax": 1,
+                "n": "Fat",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 90,
+                "n": "VOL",
+                "p": false,
+                "mdef": 40
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 67108913,
+            "n": "UK 30A",
+            "np": 7,
+            "ns": 2,
+            "fn": "UK30A_1U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Bass",
+                "p": false,
+                "mdef": 49
+            },
+            {
+                "mmax": 100,
+                "n": "Treble",
+                "p": false,
+                "mdef": 38
+            },
+            {
+                "mmax": 100,
+                "n": "Cut",
+                "p": false,
+                "mdef": 78
+            },
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 30
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 84
+            },
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 110,
+                "n": "Speed",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 67108929,
+            "n": "BG MK1",
+            "np": 7,
+            "ns": 2,
+            "fn": "BGMK1_1U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Bass",
+                "p": false,
+                "mdef": 49
+            },
+            {
+                "mmax": 100,
+                "n": "MID",
+                "p": false,
+                "mdef": 55
+            },
+            {
+                "mmax": 100,
+                "n": "Treble",
+                "p": false,
+                "mdef": 53
+            },
+            {
+                "mmax": 100,
+                "n": "PRSNC",
+                "p": false,
+                "mdef": 55
+            },
+            {
+                "mmax": 100,
+                "n": "Gain1",
+                "p": false,
+                "mdef": 72
+            },
+            {
+                "mmax": 100,
+                "n": "Gain2",
+                "p": false,
+                "mdef": 70
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 58
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 67108931,
+            "n": "BG MK3",
+            "np": 7,
+            "ns": 2,
+            "fn": "BGMK3_1U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Bass",
+                "p": false,
+                "mdef": 52
+            },
+            {
+                "mmax": 100,
+                "n": "MID",
+                "p": false,
+                "mdef": 85
+            },
+            {
+                "mmax": 100,
+                "n": "Treble",
+                "p": false,
+                "mdef": 40
+            },
+            {
+                "mmax": 100,
+                "n": "PRSNC",
+                "p": false,
+                "mdef": 40
+            },
+            {
+                "mmax": 100,
+                "n": "Gain1",
+                "p": false,
+                "mdef": 75
+            },
+            {
+                "mmax": 100,
+                "n": "Gain2",
+                "p": false,
+                "mdef": 75
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 78
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 67108945,
+            "n": "XtasyBlue",
+            "np": 7,
+            "ns": 2,
+            "fn": "XTSBLU1U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Bass",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "MID",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Treble",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "PRSNC",
+                "p": false,
+                "mdef": 40
+            },
+            {
+                "mmax": 1,
+                "n": "STRCT",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 60
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 42
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 67108961,
+            "n": "HW 100",
+            "np": 7,
+            "ns": 2,
+            "fn": "HW100_1U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "Input",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 100,
+                "n": "Bass",
+                "p": false,
+                "mdef": 40
+            },
+            {
+                "mmax": 100,
+                "n": "MID",
+                "p": false,
+                "mdef": 80
+            },
+            {
+                "mmax": 100,
+                "n": "Treble",
+                "p": false,
+                "mdef": 60
+            },
+            {
+                "mmax": 100,
+                "n": "PRSNC",
+                "p": false,
+                "mdef": 60
+            },
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 60
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 67108977,
+            "n": "Recti ORG",
+            "np": 7,
+            "ns": 2,
+            "fn": "RCTORG1U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "Mode",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "Bass",
+                "p": false,
+                "mdef": 52
+            },
+            {
+                "mmax": 100,
+                "n": "MID",
+                "p": false,
+                "mdef": 65
+            },
+            {
+                "mmax": 100,
+                "n": "Treble",
+                "p": false,
+                "mdef": 67
+            },
+            {
+                "mmax": 100,
+                "n": "PRSNC",
+                "p": false,
+                "mdef": 62
+            },
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 70
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 62
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 67108993,
+            "n": "ORG120",
+            "np": 7,
+            "ns": 2,
+            "fn": "ORG1201U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "Input",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 5,
+                "n": "Color",
+                "p": false,
+                "mdef": 3
+            },
+            {
+                "mmax": 100,
+                "n": "Bass",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Treble",
+                "p": false,
+                "mdef": 60
+            },
+            {
+                "mmax": 100,
+                "n": "PRSNC",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 53
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 100
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 67109009,
+            "n": "DZ DRV",
+            "np": 8,
+            "ns": 2,
+            "fn": "DZ_DRV1U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Bass",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "MID",
+                "p": false,
+                "mdef": 70
+            },
+            {
+                "mmax": 100,
+                "n": "Treble",
+                "p": false,
+                "mdef": 60
+            },
+            {
+                "mmax": 100,
+                "n": "PRSNC",
+                "p": false,
+                "mdef": 40
+            },
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 60
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            },
+            {
+                "mmax": 100,
+                "n": "Deep",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "MidCut",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 67109025,
+            "n": "MATCH30",
+            "np": 7,
+            "ns": 2,
+            "fn": "MACH301U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 101,
+                "n": "Gain1",
+                "p": false,
+                "mdef": 36
+            },
+            {
+                "mmax": 100,
+                "n": "Bass1",
+                "p": false,
+                "mdef": 47
+            },
+            {
+                "mmax": 100,
+                "n": "TRBL1",
+                "p": false,
+                "mdef": 49
+            },
+            {
+                "mmax": 101,
+                "n": "Gain2",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 5,
+                "n": "Tone2",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 100,
+                "n": "Cut",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 101,
+                "n": "VOL",
+                "p": false,
+                "mdef": 34
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 83886096,
+            "n": "MS4x12",
+            "np": 4,
+            "ns": 1,
+            "fn": "MS4X12.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "MIC",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "D57:D421",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 83886104,
+            "n": "MS4x12GB",
+            "np": 4,
+            "ns": 1,
+            "fn": "MS4X12GB.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "MIC",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "D57:D421",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 83886106,
+            "n": "MS4x12AL",
+            "np": 4,
+            "ns": 1,
+            "fn": "MS4X12AL.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "MIC",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "D57:D421",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 83886112,
+            "n": "FD2x12",
+            "np": 4,
+            "ns": 1,
+            "fn": "FD2X12.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "MIC",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "D57:D421",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 83886119,
+            "n": "FD-B4x10",
+            "np": 4,
+            "ns": 1,
+            "fn": "FDB4X10.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "MIC",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "D57:D421",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 83886122,
+            "n": "FD-DX1x12",
+            "np": 4,
+            "ns": 1,
+            "fn": "FDDX1X12.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "MIC",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "D57:D421",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 83886123,
+            "n": "FD MA2x12",
+            "np": 4,
+            "ns": 1,
+            "fn": "FDMA2X12.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "MIC",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "D57:D421",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 83886128,
+            "n": "UK2x12",
+            "np": 4,
+            "ns": 1,
+            "fn": "UK2X12.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "MIC",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "D57:D421",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 83886144,
+            "n": "MK1 1x12",
+            "np": 4,
+            "ns": 1,
+            "fn": "MK1_1X12.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "MIC",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "D57:D421",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 83886146,
+            "n": "MK3 1x12",
+            "np": 4,
+            "ns": 1,
+            "fn": "MK3_1X12.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "MIC",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "D57:D421",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 83886160,
+            "n": "BGN4x12",
+            "np": 4,
+            "ns": 1,
+            "fn": "BGN4X12.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "MIC",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "D57:D421",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 83886176,
+            "n": "HW4x12",
+            "np": 4,
+            "ns": 1,
+            "fn": "HW4X12.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "MIC",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "D57:D421",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 83886192,
+            "n": "RCT4x12",
+            "np": 4,
+            "ns": 1,
+            "fn": "RCT4X12.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "MIC",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "D57:D421",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 83886208,
+            "n": "ORG4x12",
+            "np": 4,
+            "ns": 1,
+            "fn": "ORG_4X12.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "MIC",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "D57:D421",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 83886224,
+            "n": "DZ4x12F",
+            "np": 4,
+            "ns": 1,
+            "fn": "DZ4X12F.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "MIC",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "D57:D421",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 83886240,
+            "n": "MA2x12",
+            "np": 4,
+            "ns": 1,
+            "fn": "MA2X12.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "MIC",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "D57:D421",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663312,
+            "n": "Tremolo",
+            "np": 4,
+            "ns": 1,
+            "fn": "TREMOLO.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 2,
+                "n": "Wave",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 90
+            },
+            {
+                "mmax": 110,
+                "n": "Rate",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 62
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663328,
+            "n": "Chorus",
+            "np": 4,
+            "ns": 1,
+            "fn": "CHORUS.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 40
+            },
+            {
+                "mmax": 49,
+                "n": "Rate",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 10,
+                "n": "Tone",
+                "p": false,
+                "mdef": 7
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663344,
+            "n": "StereoCho",
+            "np": 4,
+            "ns": 1,
+            "fn": "STEREOCH.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 80
+            },
+            {
+                "mmax": 49,
+                "n": "Rate",
+                "p": false,
+                "mdef": 29
+            },
+            {
+                "mmax": 10,
+                "n": "Tone",
+                "p": false,
+                "mdef": 7
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 60
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663360,
+            "n": "Phaser",
+            "np": 4,
+            "ns": 1,
+            "fn": "PHASER.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 3,
+                "n": "Color",
+                "p": false,
+                "mdef": 3
+            },
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 77,
+                "n": "Rate",
+                "p": false,
+                "mdef": 11
+            },
+            {
+                "mmax": 100,
+                "n": "RESO",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663376,
+            "n": "VinFLNGR",
+            "np": 4,
+            "ns": 1,
+            "fn": "VINFLNGR.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 50,
+                "n": "PreD",
+                "p": false,
+                "mdef": 4
+            },
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 47
+            },
+            {
+                "mmax": 78,
+                "n": "Rate",
+                "p": false,
+                "mdef": 7
+            },
+            {
+                "mmax": 20,
+                "n": "RESO",
+                "p": false,
+                "mdef": 18
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663392,
+            "n": "TheVibe",
+            "np": 4,
+            "ns": 1,
+            "fn": "THEVIBE.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 50,
+                "n": "Speed",
+                "p": false,
+                "mdef": 25
+            },
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 60
+            },
+            {
+                "mmax": 1,
+                "n": "Mode",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663408,
+            "n": "Vibrato",
+            "np": 4,
+            "ns": 1,
+            "fn": "VIBRATO.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 40
+            },
+            {
+                "mmax": 78,
+                "n": "Rate",
+                "p": false,
+                "mdef": 30
+            },
+            {
+                "mmax": 10,
+                "n": "Tone",
+                "p": false,
+                "mdef": 7
+            },
+            {
+                "mmax": 100,
+                "n": "BAL",
+                "p": false,
+                "mdef": 72
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663424,
+            "n": "Octave",
+            "np": 4,
+            "ns": 1,
+            "fn": "OCTAVE.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "OCT1",
+                "p": false,
+                "mdef": 80
+            },
+            {
+                "mmax": 100,
+                "n": "OCT2",
+                "p": false,
+                "mdef": 15
+            },
+            {
+                "mmax": 10,
+                "n": "Tone",
+                "p": false,
+                "mdef": 8
+            },
+            {
+                "mmax": 100,
+                "n": "Dry",
+                "p": false,
+                "mdef": 100
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663440,
+            "n": "RingMod",
+            "np": 4,
+            "ns": 1,
+            "fn": "RINGMOD.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 49,
+                "n": "FREQ",
+                "p": false,
+                "mdef": 27
+            },
+            {
+                "mmax": 10,
+                "n": "Tone",
+                "p": false,
+                "mdef": 10
+            },
+            {
+                "mmax": 100,
+                "n": "BAL",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 88
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663456,
+            "n": "Detune",
+            "np": 4,
+            "ns": 1,
+            "fn": "DETUNE.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 50,
+                "n": "Cent",
+                "p": false,
+                "mdef": 35
+            },
+            {
+                "mmax": 50,
+                "n": "PreD",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 10,
+                "n": "Tone",
+                "p": false,
+                "mdef": 8
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 52
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663472,
+            "n": "PitchSHFT",
+            "np": 4,
+            "ns": 1,
+            "fn": "PITCHSHF.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 25,
+                "n": "Shift",
+                "p": false,
+                "mdef": 19
+            },
+            {
+                "mmax": 50,
+                "n": "Fine",
+                "p": false,
+                "mdef": 25
+            },
+            {
+                "mmax": 10,
+                "n": "Tone",
+                "p": false,
+                "mdef": 7
+            },
+            {
+                "mmax": 100,
+                "n": "BAL",
+                "p": false,
+                "mdef": 40
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663488,
+            "n": "MonoPitch",
+            "np": 4,
+            "ns": 1,
+            "fn": "MONOPITC.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 25,
+                "n": "Shift",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 50,
+                "n": "Fine",
+                "p": false,
+                "mdef": 25
+            },
+            {
+                "mmax": 10,
+                "n": "Tone",
+                "p": false,
+                "mdef": 6
+            },
+            {
+                "mmax": 100,
+                "n": "BAL",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663504,
+            "n": "HPS",
+            "np": 4,
+            "ns": 1,
+            "fn": "HPS.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 9,
+                "n": "Scale",
+                "p": false,
+                "mdef": 6
+            },
+            {
+                "mmax": 11,
+                "n": "Key",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 10,
+                "n": "Tone",
+                "p": false,
+                "mdef": 6
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 70
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663536,
+            "n": "Slicer",
+            "np": 4,
+            "ns": 1,
+            "fn": "SLICER.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 19,
+                "n": "PTTRN",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 77,
+                "n": "Speed",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 50,
+                "n": "THRSH",
+                "p": false,
+                "mdef": 20
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 87
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663552,
+            "n": "CloneCho",
+            "np": 4,
+            "ns": 1,
+            "fn": "CLONECHO.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "Depth",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 100,
+                "n": "Rate",
+                "p": false,
+                "mdef": 23
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 100
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663568,
+            "n": "SuperCho",
+            "np": 4,
+            "ns": 1,
+            "fn": "SUPERCHO.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Rate",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 42
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663584,
+            "n": "StonePha",
+            "np": 4,
+            "ns": 1,
+            "fn": "STONEPHA.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "Color",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 100,
+                "n": "Rate",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "RESO",
+                "p": false,
+                "mdef": 40
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663601,
+            "n": "CoronaTri",
+            "np": 4,
+            "ns": 1,
+            "fn": "CRNTRI3S.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 100,
+                "n": "Speed",
+                "p": false,
+                "mdef": 25
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 100
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663616,
+            "n": "BendCho",
+            "np": 4,
+            "ns": 1,
+            "fn": "BENDCHO.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "Mode",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 40
+            },
+            {
+                "mmax": 50,
+                "n": "Time",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "BAL",
+                "p": false,
+                "mdef": 100
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663632,
+            "n": "AnalogCho",
+            "np": 4,
+            "ns": 1,
+            "fn": "ANA234CH.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 52
+            },
+            {
+                "mmax": 100,
+                "n": "Rate",
+                "p": false,
+                "mdef": 54
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 49
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 82
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663648,
+            "n": "WarpPhase",
+            "np": 4,
+            "ns": 1,
+            "fn": "WRPPHASE.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "Mode",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 77,
+                "n": "Speed",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 10,
+                "n": "RESO",
+                "p": false,
+                "mdef": 7
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 100663665,
+            "n": "Duo Phase",
+            "np": 8,
+            "ns": 2,
+            "fn": "DUOPHA1U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 99,
+                "n": "DPT A",
+                "p": false,
+                "mdef": 62
+            },
+            {
+                "mmax": 77,
+                "n": "RateA",
+                "p": false,
+                "mdef": 5
+            },
+            {
+                "mmax": 10,
+                "n": "ResoA",
+                "p": false,
+                "mdef": 6
+            },
+            {
+                "mmax": 2,
+                "n": "Link",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 99,
+                "n": "DPT B",
+                "p": false,
+                "mdef": 36
+            },
+            {
+                "mmax": 51,
+                "n": "RateB",
+                "p": false,
+                "mdef": 46
+            },
+            {
+                "mmax": 10,
+                "n": "ResoB",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 117440528,
+            "n": "Bomber",
+            "np": 4,
+            "ns": 1,
+            "fn": "BOMBER.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 99,
+                "n": "Decay",
+                "p": false,
+                "mdef": 49
+            },
+            {
+                "mmax": 10,
+                "n": "Tone",
+                "p": false,
+                "mdef": 4
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 30
+            },
+            {
+                "mmax": 1,
+                "n": "ON/OFF",
+                "p": false,
+                "mdef": 1
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 117440544,
+            "n": "AutoPan",
+            "np": 4,
+            "ns": 1,
+            "fn": "AUTOPAN.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 78,
+                "n": "Rate",
+                "p": false,
+                "mdef": 5
+            },
+            {
+                "mmax": 50,
+                "n": "Width",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 10,
+                "n": "Clip",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 117440577,
+            "n": "LoopRoll",
+            "np": 4,
+            "ns": 1,
+            "fn": "LPROLL3S.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 3006,
+                "n": "Time",
+                "p": false,
+                "mdef": 2992
+            },
+            {
+                "mmax": 75,
+                "n": "Duty",
+                "p": false,
+                "mdef": 75
+            },
+            {
+                "mmax": 100,
+                "n": "BAL",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 1,
+                "n": "ON/OFF",
+                "p": false,
+                "mdef": 1
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 117440592,
+            "n": "HotSpice",
+            "np": 4,
+            "ns": 1,
+            "fn": "HOTSPICE.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Bend",
+                "p": false,
+                "mdef": 11
+            },
+            {
+                "mmax": 100,
+                "n": "Buzz",
+                "p": false,
+                "mdef": 57
+            },
+            {
+                "mmax": 100,
+                "n": "+1oct",
+                "p": false,
+                "mdef": 36
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 134217745,
+            "n": "Delay",
+            "np": 4,
+            "ns": 1,
+            "fn": "DELAY_3S.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 3018,
+                "n": "Time",
+                "p": false,
+                "mdef": 559
+            },
+            {
+                "mmax": 100,
+                "n": "F.B",
+                "p": false,
+                "mdef": 30
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 70
+            },
+            {
+                "mmax": 1,
+                "n": "Tail",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 134217761,
+            "n": "AnalogDly",
+            "np": 4,
+            "ns": 1,
+            "fn": "ANDLY_3S.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 3018,
+                "n": "Time",
+                "p": false,
+                "mdef": 359
+            },
+            {
+                "mmax": 100,
+                "n": "F.B",
+                "p": false,
+                "mdef": 28
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 40
+            },
+            {
+                "mmax": 1,
+                "n": "Tail",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 134217776,
+            "n": "TapeEcho",
+            "np": 4,
+            "ns": 1,
+            "fn": "TAPEECHO.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 2014,
+                "n": "Time",
+                "p": false,
+                "mdef": 559
+            },
+            {
+                "mmax": 100,
+                "n": "F.B",
+                "p": false,
+                "mdef": 64
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 56
+            },
+            {
+                "mmax": 1,
+                "n": "Tail",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 134217793,
+            "n": "ReverseDL",
+            "np": 4,
+            "ns": 1,
+            "fn": "RVRSDL3S.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1503,
+                "n": "Time",
+                "p": false,
+                "mdef": 990
+            },
+            {
+                "mmax": 100,
+                "n": "F.B",
+                "p": false,
+                "mdef": 20
+            },
+            {
+                "mmax": 100,
+                "n": "BAL",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 1,
+                "n": "Tail",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 134217808,
+            "n": "ModDelay",
+            "np": 4,
+            "ns": 1,
+            "fn": "MODDELAY.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 2014,
+                "n": "Time",
+                "p": false,
+                "mdef": 499
+            },
+            {
+                "mmax": 100,
+                "n": "F.B",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 62
+            },
+            {
+                "mmax": 1,
+                "n": "Tail",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 134217857,
+            "n": "P-P Delay",
+            "np": 4,
+            "ns": 1,
+            "fn": "PPDLY_3S.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 3018,
+                "n": "Time",
+                "p": false,
+                "mdef": 559
+            },
+            {
+                "mmax": 100,
+                "n": "F.B",
+                "p": false,
+                "mdef": 30
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 70
+            },
+            {
+                "mmax": 1,
+                "n": "Tail",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 134217872,
+            "n": "FilterDly",
+            "np": 4,
+            "ns": 1,
+            "fn": "FLTRDLY.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 2014,
+                "n": "Time",
+                "p": false,
+                "mdef": 499
+            },
+            {
+                "mmax": 100,
+                "n": "F.B",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 90
+            },
+            {
+                "mmax": 1,
+                "n": "Tail",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 134217889,
+            "n": "Dual DLY",
+            "np": 8,
+            "ns": 2,
+            "fn": "DUALDL3S.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1503,
+                "n": "TimeA",
+                "p": false,
+                "mdef": 500
+            },
+            {
+                "mmax": 110,
+                "n": "F.B A",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 1503,
+                "n": "TimeB",
+                "p": false,
+                "mdef": 375
+            },
+            {
+                "mmax": 110,
+                "n": "F.B B",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "DlyMx",
+                "p": false,
+                "mdef": 25
+            },
+            {
+                "mmax": 100,
+                "n": "BAL",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 101,
+                "n": "Depth",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 50,
+                "n": "Speed",
+                "p": false,
+                "mdef": 25
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 134217905,
+            "n": "Pitch DLY",
+            "np": 4,
+            "ns": 1,
+            "fn": "PTCHDL3S.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 30,
+                "n": "Pitch",
+                "p": false,
+                "mdef": 21
+            },
+            {
+                "mmax": 1999,
+                "n": "Time",
+                "p": false,
+                "mdef": 89
+            },
+            {
+                "mmax": 100,
+                "n": "F.B",
+                "p": false,
+                "mdef": 80
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 134217921,
+            "n": "SlapBackD",
+            "np": 4,
+            "ns": 1,
+            "fn": "SLPBKD3S.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 300,
+                "n": "Time",
+                "p": false,
+                "mdef": 98
+            },
+            {
+                "mmax": 100,
+                "n": "F.B",
+                "p": false,
+                "mdef": 29
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 40
+            },
+            {
+                "mmax": 2,
+                "n": "SubDv",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 134217937,
+            "n": "A-Pan DLY",
+            "np": 7,
+            "ns": 2,
+            "fn": "APANDL3S.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1512,
+                "n": "Time",
+                "p": false,
+                "mdef": 222
+            },
+            {
+                "mmax": 100,
+                "n": "F.B",
+                "p": false,
+                "mdef": 87
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 53
+            },
+            {
+                "mmax": 1,
+                "n": "Link",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 52,
+                "n": "Cycle",
+                "p": false,
+                "mdef": 26
+            },
+            {
+                "mmax": 50,
+                "n": "Width",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 10,
+                "n": "Clip",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 134217953,
+            "n": "PhaseDly",
+            "np": 8,
+            "ns": 2,
+            "fn": "PHASDL1U.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 2014,
+                "n": "Time",
+                "p": false,
+                "mdef": 2006
+            },
+            {
+                "mmax": 100,
+                "n": "F.B",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 56
+            },
+            {
+                "mmax": 1,
+                "n": "Tail",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 3,
+                "n": "Color",
+                "p": false,
+                "mdef": 2
+            },
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 77,
+                "n": "Rate",
+                "p": false,
+                "mdef": 59
+            },
+            {
+                "mmax": 100,
+                "n": "Reso",
+                "p": false,
+                "mdef": 48
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 134217969,
+            "n": "TapeEcho3",
+            "np": 8,
+            "ns": 2,
+            "fn": "TPEC3_3S.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 62
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 47
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            },
+            {
+                "mmax": 1005,
+                "n": "Time",
+                "p": false,
+                "mdef": 350
+            },
+            {
+                "mmax": 100,
+                "n": "F.B",
+                "p": false,
+                "mdef": 20
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "RecLv",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 134217985,
+            "n": "ICE Delay",
+            "np": 4,
+            "ns": 1,
+            "fn": "ICEDLY3S.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 30,
+                "n": "INTVL",
+                "p": false,
+                "mdef": 28
+            },
+            {
+                "mmax": 931,
+                "n": "Time",
+                "p": false,
+                "mdef": 928
+            },
+            {
+                "mmax": 100,
+                "n": "F.B",
+                "p": false,
+                "mdef": 46
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 36
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 134218001,
+            "n": "SlwAtkDly",
+            "np": 4,
+            "ns": 1,
+            "fn": "SLATDL3S.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 49,
+                "n": "Swell",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 1411,
+                "n": "Time",
+                "p": false,
+                "mdef": 489
+            },
+            {
+                "mmax": 100,
+                "n": "F.B",
+                "p": false,
+                "mdef": 71
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 64
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 134218017,
+            "n": "SoftEcho",
+            "np": 4,
+            "ns": 1,
+            "fn": "SOFTEC3S.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "MOD",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 562,
+                "n": "Time",
+                "p": false,
+                "mdef": 387
+            },
+            {
+                "mmax": 100,
+                "n": "F.B",
+                "p": false,
+                "mdef": 47
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 69
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 150994960,
+            "n": "Air",
+            "np": 4,
+            "ns": 1,
+            "fn": "AIR.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 99,
+                "n": "Size",
+                "p": false,
+                "mdef": 19
+            },
+            {
+                "mmax": 10,
+                "n": "REF",
+                "p": false,
+                "mdef": 5
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 60
+            },
+            {
+                "mmax": 1,
+                "n": "Tail",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 150994976,
+            "n": "Room",
+            "np": 4,
+            "ns": 1,
+            "fn": "ROOM.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 99,
+                "n": "PreD",
+                "p": false,
+                "mdef": 4
+            },
+            {
+                "mmax": 29,
+                "n": "Decay",
+                "p": false,
+                "mdef": 9
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 60
+            },
+            {
+                "mmax": 1,
+                "n": "Tail",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 150994992,
+            "n": "Hall",
+            "np": 4,
+            "ns": 1,
+            "fn": "HALL.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 99,
+                "n": "PreD",
+                "p": false,
+                "mdef": 48
+            },
+            {
+                "mmax": 29,
+                "n": "Decay",
+                "p": false,
+                "mdef": 9
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 46
+            },
+            {
+                "mmax": 1,
+                "n": "Tail",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 150995008,
+            "n": "HD Hall",
+            "np": 4,
+            "ns": 1,
+            "fn": "HD_HALL.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 199,
+                "n": "PreD",
+                "p": false,
+                "mdef": 80
+            },
+            {
+                "mmax": 100,
+                "n": "Decay",
+                "p": false,
+                "mdef": 45
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 62
+            },
+            {
+                "mmax": 1,
+                "n": "Tail",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 150995024,
+            "n": "Spring",
+            "np": 4,
+            "ns": 1,
+            "fn": "SPRING.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 99,
+                "n": "PreD",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 29,
+                "n": "Decay",
+                "p": false,
+                "mdef": 19
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 1,
+                "n": "Tail",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 150995040,
+            "n": "FD Spring",
+            "np": 4,
+            "ns": 1,
+            "fn": "FDSPRING.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "Color",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "Lo",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 100,
+                "n": "Hi",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 150995056,
+            "n": "Plate",
+            "np": 4,
+            "ns": 1,
+            "fn": "PLATEREV.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 199,
+                "n": "PreD",
+                "p": false,
+                "mdef": 8
+            },
+            {
+                "mmax": 100,
+                "n": "Decay",
+                "p": false,
+                "mdef": 52
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 44
+            },
+            {
+                "mmax": 1,
+                "n": "Tail",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 150995072,
+            "n": "EarlyRef",
+            "np": 4,
+            "ns": 1,
+            "fn": "EARLYREF.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 29,
+                "n": "Decay",
+                "p": false,
+                "mdef": 14
+            },
+            {
+                "mmax": 20,
+                "n": "Shape",
+                "p": false,
+                "mdef": 20
+            },
+            {
+                "mmax": 10,
+                "n": "Tone",
+                "p": false,
+                "mdef": 6
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 50
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 150995104,
+            "n": "Church",
+            "np": 4,
+            "ns": 1,
+            "fn": "CHURCH.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 200,
+                "n": "PreD",
+                "p": false,
+                "mdef": 96
+            },
+            {
+                "mmax": 100,
+                "n": "Decay",
+                "p": false,
+                "mdef": 49
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 46
+            },
+            {
+                "mmax": 1,
+                "n": "Tail",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 150995152,
+            "n": "Chamber",
+            "np": 4,
+            "ns": 1,
+            "fn": "CHAMBER.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 200,
+                "n": "PreD",
+                "p": false,
+                "mdef": 24
+            },
+            {
+                "mmax": 100,
+                "n": "Decay",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 48
+            },
+            {
+                "mmax": 1,
+                "n": "Tail",
+                "p": false,
+                "mdef": 1
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 150995168,
+            "n": "GateRev",
+            "np": 4,
+            "ns": 1,
+            "fn": "GATE_REV.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 4,
+                "n": "Color",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "Decay",
+                "p": false,
+                "mdef": 55
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "BAL",
+                "p": false,
+                "mdef": 60
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 184549392,
+            "n": "PDL Vol",
+            "np": 4,
+            "ns": 1,
+            "fn": "PDL_VOL.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": true,
+                "mdef": 100
+            },
+            {
+                "mmax": 100,
+                "n": "Min",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "Max",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 1,
+                "n": "Curve",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 184549408,
+            "n": "BlackWah",
+            "np": 4,
+            "ns": 1,
+            "fn": "BLCK_WAH.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "FREQ",
+                "p": true,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Range",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Dry",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 184549424,
+            "n": "ChromeWah",
+            "np": 4,
+            "ns": 1,
+            "fn": "CHRM_WAH.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "FREQ",
+                "p": true,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Range",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Dry",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 184549440,
+            "n": "WAH100",
+            "np": 4,
+            "ns": 1,
+            "fn": "WH100.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 50,
+                "n": "FREQ",
+                "p": true,
+                "mdef": 25
+            },
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 40
+            },
+            {
+                "mmax": 100,
+                "n": "Dry",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 184549456,
+            "n": "PDL Pitch",
+            "np": 4,
+            "ns": 1,
+            "fn": "PDL_PIT.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Bend",
+                "p": true,
+                "mdef": 0
+            },
+            {
+                "mmax": 8,
+                "n": "Color",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 10,
+                "n": "Tone",
+                "p": false,
+                "mdef": 10
+            },
+            {
+                "mmax": 1,
+                "n": "Mode",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 184549472,
+            "n": "PDL MnPit",
+            "np": 4,
+            "ns": 1,
+            "fn": "PDL_MNPT.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Bend",
+                "p": true,
+                "mdef": 0
+            },
+            {
+                "mmax": 8,
+                "n": "Color",
+                "p": false,
+                "mdef": 0
+            },
+            {
+                "mmax": 10,
+                "n": "Tone",
+                "p": false,
+                "mdef": 10
+            },
+            {
+                "mmax": 1,
+                "n": "Mode",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 184549488,
+            "n": "PDL Vibe",
+            "np": 4,
+            "ns": 1,
+            "fn": "PDL_VIBE.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 50,
+                "n": "Speed",
+                "p": true,
+                "mdef": 25
+            },
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 60
+            },
+            {
+                "mmax": 1,
+                "n": "Mode",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 184549504,
+            "n": "PDL Drive",
+            "np": 4,
+            "ns": 1,
+            "fn": "PDL_DRV.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Gain",
+                "p": true,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "Tone",
+                "p": false,
+                "mdef": 74
+            },
+            {
+                "mmax": 100,
+                "n": "PRSNC",
+                "p": false,
+                "mdef": 48
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 61
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 184549520,
+            "n": "PDL PHSR",
+            "np": 4,
+            "ns": 1,
+            "fn": "PDL_PHA.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 49,
+                "n": "Rate",
+                "p": true,
+                "mdef": 11
+            },
+            {
+                "mmax": 100,
+                "n": "Depth",
+                "p": false,
+                "mdef": 100
+            },
+            {
+                "mmax": 100,
+                "n": "RESO",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 3,
+                "n": "Color",
+                "p": false,
+                "mdef": 3
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 184549537,
+            "n": "PDL Delay",
+            "np": 4,
+            "ns": 1,
+            "fn": "PDLDLY3S.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "InLvl",
+                "p": true,
+                "mdef": 100
+            },
+            {
+                "mmax": 3018,
+                "n": "Time",
+                "p": false,
+                "mdef": 359
+            },
+            {
+                "mmax": 100,
+                "n": "F.B",
+                "p": false,
+                "mdef": 40
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 100
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 184549552,
+            "n": "PDL Rev",
+            "np": 4,
+            "ns": 1,
+            "fn": "PDL_REV.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "InLvl",
+                "p": true,
+                "mdef": 100
+            },
+            {
+                "mmax": 99,
+                "n": "PreD",
+                "p": false,
+                "mdef": 48
+            },
+            {
+                "mmax": 29,
+                "n": "Decay",
+                "p": false,
+                "mdef": 14
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 184549569,
+            "n": "OSC Echo",
+            "np": 4,
+            "ns": 1,
+            "fn": "OSCECH3S.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "OSC",
+                "p": true,
+                "mdef": 0
+            },
+            {
+                "mmax": 481,
+                "n": "T-Min",
+                "p": false,
+                "mdef": 311
+            },
+            {
+                "mmax": 481,
+                "n": "T-Max",
+                "p": false,
+                "mdef": 81
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 184549584,
+            "n": "VoiceWah",
+            "np": 4,
+            "ns": 1,
+            "fn": "VOICE_WH.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "Vowel",
+                "p": true,
+                "mdef": 0
+            },
+            {
+                "mmax": 2,
+                "n": "PTTRN",
+                "p": false,
+                "mdef": 1
+            },
+            {
+                "mmax": 100,
+                "n": "Voice",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 1,
+                "n": "Mode",
+                "p": false,
+                "mdef": 0
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 184549601,
+            "n": "PDL Roto",
+            "np": 4,
+            "ns": 1,
+            "fn": "PDLROT3S.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 1,
+                "n": "Mode",
+                "p": true,
+                "mdef": 0
+            },
+            {
+                "mmax": 100,
+                "n": "Drive",
+                "p": false,
+                "mdef": 20
+            },
+            {
+                "mmax": 100,
+                "n": "BAL",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 80
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 184549616,
+            "n": "P-BitCRSH",
+            "np": 4,
+            "ns": 1,
+            "fn": "PDL_BITC.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 50,
+                "n": "SMPL",
+                "p": true,
+                "mdef": 2
+            },
+            {
+                "mmax": 13,
+                "n": "Bit",
+                "p": false,
+                "mdef": 5
+            },
+            {
+                "mmax": 10,
+                "n": "Tone",
+                "p": false,
+                "mdef": 8
+            },
+            {
+                "mmax": 100,
+                "n": "BAL",
+                "p": false,
+                "mdef": 90
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 184549632,
+            "n": "PDL FLNGR",
+            "np": 4,
+            "ns": 1,
+            "fn": "PDL_FLNG.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 100,
+                "n": "FREQ",
+                "p": true,
+                "mdef": 50
+            },
+            {
+                "mmax": 20,
+                "n": "RESO",
+                "p": false,
+                "mdef": 18
+            },
+            {
+                "mmax": 10,
+                "n": "HiDMP",
+                "p": false,
+                "mdef": 8
+            },
+            {
+                "mmax": 100,
+                "n": "Mix",
+                "p": false,
+                "mdef": 65
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 192938016,
+            "n": "PDL Reso",
+            "np": 4,
+            "ns": 1,
+            "fn": "PDL_RESO.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 49,
+                "n": "FREQ",
+                "p": true,
+                "mdef": 11
+            },
+            {
+                "mmax": 10,
+                "n": "RESO",
+                "p": false,
+                "mdef": 7
+            },
+            {
+                "mmax": 100,
+                "n": "Dry",
+                "p": false,
+                "mdef": 50
+            },
+            {
+                "mmax": 100,
+                "n": "VOL",
+                "p": false,
+                "mdef": 92
+            }
+        ]
+    },
+    {
+        "FX": {
+            "id": 199294960,
+            "n": "Output VP",
+            "np": 1,
+            "ns": 1,
+            "fn": "OUT_VP.ZD2.BMP"
+        },
+        "P": [
+            {
+                "mmax": 5075,
+                "n": "-",
+                "p": false,
+                "mdef": 4947
+            }
+        ]
+    }
+]
