@@ -1,3 +1,4 @@
+#include <MIDI.h>
 // pio-usb is required for rp2040 host
 #include "pio_usb.h"
 #define HOST_PIN_DP 2  // Pin used as D+ for host, D- = D+ + 1
@@ -18,6 +19,9 @@ static bool cloned = false;
 static bool init_core1 = false;
 String manufacturer, product;
 
+static bool sysex_complete = false;
+static bool sysex_receive_complete = false;
+
 uint8_t whoareyou[] = { 0x7e, 0x00, 0x06, 0x01 };
 uint8_t editoron[] = { 0x52, 0x00, 0x6e, 0x50 };
 uint8_t editoroff[] = { 0x52, 0x00, 0x6e, 0x51 };
@@ -25,6 +29,56 @@ uint8_t patch_download_current[] = { 0x52, 0x00, 0x6e, 0x29 };
 uint8_t toggle_effect_on[] = { 0x52, 0x00, 0x6E, 0x64, 0x03, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00 };
 uint8_t toggle_effect_off[] = { 0x52, 0x00, 0x6E, 0x64, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 int sequence = 0;
+
+typedef enum {
+  EMPTY,
+  READING,
+  READY
+} message_state_t;
+
+typedef enum {
+  IDLE,
+  SYSEX,
+  CC,
+  PC
+} pedal_state_t;
+
+pedal_state_t PEDAL_STATE = IDLE;
+
+typedef enum {
+  STANDBY,
+  WHOAREYOU,
+  EDITORON,
+  EDITOROFF,
+  GETPATCH,
+  //EFFECTON,
+  //EFFECTOFF,
+  //GETDELAYTEMPO,
+  //SETDELAYTEMPO,
+  //GETTEMPO
+  //SETTEMPO
+} pedal_tasks_t;
+
+pedal_tasks_t todo = STANDBY;
+
+//uint8_t sysex_message[1024];
+struct Sysex {
+  uint8_t message[1024];
+  int size = 0;
+  message_state_t status = EMPTY;
+} sysex_message;
+
+struct CChange {
+  uint8_t message[2];
+  message_state_t status = EMPTY;
+} cc_message;
+
+struct PChange {
+  uint8_t message[3];
+  message_state_t status = EMPTY;
+} pc_message;
+
+Sysex unpacked;
 
 // the setup function runs once when you press reset or power the board
 void setup() {
@@ -43,6 +97,34 @@ void loop() {
     Serial1.println("Initing device");
     device_configured = true;
   }
+  int pos = 0;
+  if (PEDAL_STATE != IDLE) {
+    if (PEDAL_STATE == SYSEX) {
+      if (sysex_message.status == READY) {
+        Serial1.println(sysex_message.status);
+        Serial1.println("SysEx");
+        for (int i = 0; i < sysex_message.size; i++) {
+          pos++;
+          Serial1.printf("%02x ", sysex_message.message[i]);
+          if (pos == 16) {
+            Serial1.println("");
+            pos = 0;
+          }
+        }
+        sysex_message.status = EMPTY;
+        Serial1.println("");
+        Serial1.println("UNPACKED");
+        unpack();
+        PEDAL_STATE = IDLE;
+      }
+    } else if (PEDAL_STATE == CC) {
+      Serial1.println("Control change");
+      PEDAL_STATE = IDLE;
+    } else if (PEDAL_STATE == PC) {
+      Serial1.println("Program change - Request current patch");
+      PEDAL_STATE = IDLE;
+    }
+  }
 }
 
 // core1's setup
@@ -50,7 +132,7 @@ void setup1() {
   while (!init_core1) {
     //Espera o core0 inicializar
   }
-  Serial1.println("started");
+  Serial1.print("Starting host...");
   pio_usb_configuration_t pio_cfg = PIO_USB_DEFAULT_CONFIG;
   pio_cfg.pin_dp = HOST_PIN_DP;
   USBHost.configure_pio_usb(1, &pio_cfg);
@@ -59,6 +141,7 @@ void setup1() {
   // Note: For rp2040 pico-pio-usb, calling USBHost.begin() on core1 will have most of the
   // host bit-banging processing works done in core1 to free up core0 for other works
   USBHost.begin(1);
+  Serial1.println("started");
 }
 
 static void poll_midi_host_rx(void) {
@@ -81,7 +164,10 @@ static void poll_midi_host_rx(void) {
 
 static void midi_host_app_task(void) {
   poll_midi_host_rx();
-  tuh_midi_stream_flush(midi_dev_addr);
+  if (sysex_complete) {
+    tuh_midi_stream_flush(midi_dev_addr);
+    sysex_complete = false;
+  }
 }
 
 // core1's loop
@@ -98,14 +184,9 @@ void loop1() {
     } else if (sequence == 1) {
       send_sysex(editoron, 4);
     } else {
-      if (sequence % 2 == 0) {
-        send_sysex(toggle_effect_on, 13);
-      } else {
-        send_sysex(toggle_effect_off, 13);
-      }
+      send_sysex(patch_download_current, 4);
     }
     sequence++;
-    Serial1.println("Sending sysex");
   }
   midi_host_app_task();
 }
@@ -113,8 +194,7 @@ void loop1() {
 void send_sysex(uint8_t* message, int size) {
   size += 2;
   uint8_t new_message[size];
-  Serial1.println(size);
-  Serial1.println(sizeof(new_message) / sizeof(uint8_t));
+
   //Add start and end markers for sysex
   new_message[0] = 0xf0;
   for (int i = 0; i < size - 2; i++) {
@@ -126,10 +206,9 @@ void send_sysex(uint8_t* message, int size) {
   for (int i = 0; i < size; i++) {
     Serial1.printf("%x ", new_message[i]);
   }
-  Serial1.println("fim");
+  Serial1.println("");
 
   int numpackets = ceil((double)size / 3.0);
-  Serial1.println(numpackets);
   uint8_t packet[4];
   int index = 0;
   for (int i = 0; i < numpackets; i++) {
@@ -155,11 +234,57 @@ void send_sysex(uint8_t* message, int size) {
         index++;
       }
     }
-    Serial1.printf("%x %x %x %x\r\n", packet[0], packet[1], packet[2], packet[3]);
     tuh_midi_packet_write(midi_dev_addr, packet);
   }
+  sysex_complete = true;
 }
 
+void unpack() {
+  Serial1.printf("unpacking message with size %d\r\n", sysex_message.size);
+  Sysex tounpack;
+  for(int i=4;i<sysex_message.size;i++){
+    tounpack.message[i-4]=sysex_message.message[i];
+  }
+  //unpacked.size=midi::decodeSysEx(tounpack.message,unpacked.message,sysex_message.size-4);
+  int index = -1;
+  uint8_t hibits = 0;
+
+  for (int i = 4; i < sysex_message.size; i++) {
+    if(index!=-1) {
+      //Serial1.printf("i:%d index:%d hibits:%x byte:%x", i, index, hibits, sysex_message.message[i]);
+      //if(bitRead(hibits,index)){
+        uint8_t b=sysex_message.message[i];
+        uint8_t c;
+      if(bitRead(hibits,index)==1){
+        bitSet(b,7);
+      } 
+      unpacked.message[unpacked.size++] = b;
+      index--;
+    }else{
+      hibits = sysex_message.message[i];
+      index = 6;
+    } 
+  }
+  Serial1.println("done");
+  Serial1.println("Searching for EDTB");
+  int pos=0;
+  for (int i = 0; i < unpacked.size; i++) {
+    if(unpacked.message[i]==0x45 &&
+    unpacked.message[i+1]==0x44 &&
+    unpacked.message[i+2]==0x54 &&
+    unpacked.message[i+3]==0x42){
+      Serial1.printf("EDTB at index %d",i);
+    }
+    Serial1.printf("%c ", unpacked.message[i]);
+    pos++;
+    if (pos == 16) {
+      Serial1.println("");
+      pos = 0;
+    }
+  }
+  unpacked.size=0;
+  sysex_message.size=0;
+}
 //--------------------------------------------------------------------+
 // TinyUSB Host callbacks
 //--------------------------------------------------------------------+
@@ -173,16 +298,47 @@ void tuh_umount_cb(uint8_t daddr) {
   midi_dev_addr = 0;
 }
 
-//tuh_configuration_set(uint8_t daddr, uint8_t config_num, tuh_xfer_cb_t complete_cb, uintptr_t user_data)
 void tuh_midi_rx_cb(uint8_t dev_addr, uint32_t num_packets) {
   if (midi_dev_addr == dev_addr) {
-    Serial1.printf("Got %d packets from device at addr %d\r\n", num_packets, dev_addr);
     int i = 1;
     while (num_packets > 0) {
       --num_packets;
       uint8_t packet[4];
+      uint8_t cin;
       if (tuh_midi_packet_read(dev_addr, packet)) {
-        Serial1.printf("Packet %d contents: %x %x %x %x\r\n", i++, packet[0], packet[1], packet[2], packet[3]);
+        cin = packet[0];
+        //SysEx message
+        if (cin == 0x04 || cin == 0x05 || cin == 0x06 || cin == 0x07) {
+          if (cin == 4) {
+            if (sysex_message.status == EMPTY) {
+              sysex_message.status = READING;
+            }
+            if (packet[1] != 0xf0) {
+              sysex_message.message[sysex_message.size++] = packet[1];
+            }
+            sysex_message.message[sysex_message.size++] = packet[2];
+            sysex_message.message[sysex_message.size++] = packet[3];
+          }
+          if (cin == 5) {
+            sysex_message.status = READY;
+          }
+          if (cin == 6) {
+            sysex_message.message[sysex_message.size++] = packet[1];
+            sysex_message.status = READY;
+          }
+          if (cin == 7) {
+            sysex_message.message[sysex_message.size++] = packet[1];
+            sysex_message.message[sysex_message.size++] = packet[2];
+            sysex_message.status = READY;
+          }
+          if (sysex_message.status == READY) {
+            PEDAL_STATE = SYSEX;
+          }
+        } else if (cin == 0xb) {
+          PEDAL_STATE = CC;
+        } else if (cin == 0xc) {
+          PEDAL_STATE = PC;
+        }
       }
     }
   }
