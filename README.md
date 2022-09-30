@@ -14,7 +14,7 @@ This project wouldn't be possible without [zoom-zt2](https://github.com/mungewel
 - 5 x SPST momentary footswitches
 - 1 x female USB type A breakout board
 - Some jumper wires
-- Some box or case to contain everything - mine is 3d printed and the files are available on the case folder
+- Some box or case to contain everything - mine will be 3d printed and the files available on the case folder
 
 ## DEPENDENCIES
 This project makes use of the following libraries:
