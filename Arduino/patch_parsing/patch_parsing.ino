@@ -29,9 +29,9 @@ uint8_t toggle_effect_on[] = { 0x52, 0x00, 0x6E, 0x64, 0x03, 0x00, 0x00, 0x00, 0
 uint8_t toggle_effect_off[] = { 0x52, 0x00, 0x6E, 0x64, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 int sequence = 0;
 
-struct Patch{
-  uint8_t cur_slot=0;
-  uint8_t n_effects=0;
+struct Patch {
+  uint8_t cur_slot = 0;
+  uint8_t n_effects = 0;
   Effect effects[8];
 };
 
@@ -139,13 +139,13 @@ void handle_core0_states_and_tasks() {
         core0_state = IDLE;
         core0_task = EDITOR_ON_REQUEST;
         usb_state = IDENTIFIED;
-        sysex_message.status=EMPTY;
+        sysex_message.status = EMPTY;
       } else if (core0_task == EDITOR_ON_PENDING && other_core == EDITOR_ON_RECEIVED) {
         Serial1.println("Editor mode turned on");
         core0_state = IDLE;
         core0_task = CURRENT_PATCH_REQUEST;
         usb_state = EDITOR_ON;
-        sysex_message.status=EMPTY;
+        sysex_message.status = EMPTY;
       } else if (core0_task == CURRENT_PATCH_PENDING && other_core == CURRENT_PATCH_RECEIVED) {
         Serial1.println("Got current patch");
         core0_state = IDLE;
@@ -244,21 +244,24 @@ void parse_patch() {
     //Handle patch file
     // Useful data is between EDTB and PPRM keywords
     uint8_t edtbk[] = { 'E', 'D', 'T', 'B' };
-    int edtb_start=find_section_index(edtbk)+4;
+    int edtb_start = find_section_index(edtbk) + 4;
     uint8_t pprmk[] = { 'P', 'P', 'R', 'M' };
-    int edtb_end=find_section_index(pprmk);
-    int neff=unpacked.message[edtb_start]/24;
-    current_patch.n_effects=neff;
-    for (int i=0;i<neff;i++){
-      long uniao = unpacked.message[edtb_start+(7+i*24)]<<24 | unpacked.message[edtb_start+(6+i*24)] <<16 | unpacked.message[edtb_start+(5+i*24)]<<8 | unpacked.message[edtb_start+(4+i*24)];
-      long id = (uniao>>1) & 0xfffffff;
-      current_patch.effects[i]=effects[get_effect_by_id(id)];
-      Serial1.printf("Effect %s with id %d uses %d slots and has %d parameters\r\n",current_patch.effects[i].fxname,id,current_patch.effects[i].nslots,current_patch.effects[i].nparam);
+    int edtb_end = find_section_index(pprmk);
+    int neff = unpacked.message[edtb_start] / 24;
+    current_patch.n_effects = neff;
+    for (int i = 0; i < neff; i++) {
+      long uniao = unpacked.message[edtb_start + (7 + i * 24)] << 24 | unpacked.message[edtb_start + (6 + i * 24)] << 16 | unpacked.message[edtb_start + (5 + i * 24)] << 8 | unpacked.message[edtb_start + (4 + i * 24)];
+      long id = (uniao >> 1) & 0xfffffff;
+      int index = get_effect_by_id(id);
+      if (index > -1) {
+        current_patch.effects[i] = effects[index];
+        Serial1.printf("Effect %s with id %d uses %d slots and has %d parameters\r\n", current_patch.effects[i].fxname, id, current_patch.effects[i].nslots, current_patch.effects[i].nparam);
+      }
     }
   }
   unpacked.size = 0;
   sysex_message.size = 0;
-  sysex_message.status=EMPTY;
+  sysex_message.status = EMPTY;
 }
 
 int find_section_index(uint8_t* section) {
@@ -289,6 +292,7 @@ void setup1() {
   // host bit-banging processing works done in core1 to free up core0 for other works
   USBHost.begin(1);
   Serial1.println("done");
+  core1_state = WAITING;
 }
 
 // core1's loop
@@ -450,13 +454,21 @@ void tuh_umount_cb(uint8_t daddr) {
   digitalWrite(LED_BUILTIN, LOW);
   midi_dev_addr = 0;
   usb_state = DISCONNECTED;
+  cloned = false;
+  device_mounted = false;
+  core0_state = IDLE;
+  core0_task = NONE;
+  core1_state = IDLE;
+  core1_task = NONE;
+  usb_state = DISCONNECTED;
+  Serial1.println("device disconnected");
 }
 
 void handle_sysex_rx_cb(uint8_t* packet, uint8_t cin) {
   if (cin == 4) {
     if (sysex_message.status == EMPTY) {
       sysex_message.status = READING;
-      sysex_message.size=0;
+      sysex_message.size = 0;
     }
     if (packet[1] != 0xf0) {
       sysex_message.message[sysex_message.size++] = packet[1];
