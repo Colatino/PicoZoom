@@ -23,11 +23,11 @@ This project makes use of the following libraries:
 
 ## ROADMAP
 - [x] Ensure USB communications
-- [ ] Detect pedal plug/unplug
-- [ ] Handle MIDI packets
-  - [ ] Get pedal model/vid/pid
-  - [ ] Get current patch
-    - [ ] Get current patch effects state (on/off)
+- [x] Detect pedal plug/unplug
+- [x] Handle MIDI packets
+  - [x] Get pedal model/vid/pid
+  - [x] Get current patch
+    - [x] Get current patch effects state (on/off)
     - [ ] Set current patch effect state (on/off)
     - [ ] Detect if there is a delay effect on patch
       - [ ] Get delay tempo
