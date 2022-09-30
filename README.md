@@ -20,6 +20,7 @@ This project wouldn't be possible without [zoom-zt2](https://github.com/mungewel
 This project makes use of the following libraries:
 - A custom version of [Adafruit_TinyUSB_Arduino](https://github.com/adafruit/Adafruit_TinyUSB_Arduino) based on [rppicomidi's fork](https://github.com/rppicomidi/tinyusb/tree/pio-midihost) of [tinyusb](https://github.com/hathach/tinyusb)
 - [Adafruit_SSD1306](https://github.com/adafruit/Adafruit_SSD1306) and its dependencies
+- [Arduino MIDI](https://github.com/FortySevenEffects/arduino_midi_library)
 
 ## ROADMAP
 - [x] Ensure USB communications
