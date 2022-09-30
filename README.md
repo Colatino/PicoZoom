@@ -14,20 +14,21 @@ This project wouldn't be possible without [zoom-zt2](https://github.com/mungewel
 - 5 x SPST momentary footswitches
 - 1 x female USB type A breakout board
 - Some jumper wires
-- Some box or case to contain everything - mine is 3d printed and the files are available on the case folder
+- Some box or case to contain everything - mine will be 3d printed and the files available on the case folder
 
 ## DEPENDENCIES
 This project makes use of the following libraries:
 - A custom version of [Adafruit_TinyUSB_Arduino](https://github.com/adafruit/Adafruit_TinyUSB_Arduino) based on [rppicomidi's fork](https://github.com/rppicomidi/tinyusb/tree/pio-midihost) of [tinyusb](https://github.com/hathach/tinyusb)
 - [Adafruit_SSD1306](https://github.com/adafruit/Adafruit_SSD1306) and its dependencies
+- [Arduino MIDI](https://github.com/FortySevenEffects/arduino_midi_library)
 
 ## ROADMAP
 - [x] Ensure USB communications
-- [ ] Detect pedal plug/unplug
-- [ ] Handle MIDI packets
-  - [ ] Get pedal model/vid/pid
-  - [ ] Get current patch
-    - [ ] Get current patch effects state (on/off)
+- [x] Detect pedal plug/unplug
+- [x] Handle MIDI packets
+  - [x] Get pedal model/vid/pid
+  - [x] Get current patch
+    - [x] Get current patch effects state (on/off)
     - [ ] Set current patch effect state (on/off)
     - [ ] Detect if there is a delay effect on patch
       - [ ] Get delay tempo
