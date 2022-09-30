@@ -33,6 +33,9 @@ struct Patch {
   uint8_t cur_slot = 0;
   uint8_t n_effects = 0;
   uint8_t slots[5];
+  bool states[5];
+  bool delay[5];
+  bool xpedal[5];
   Effect effects[5];
 };
 
@@ -75,7 +78,6 @@ typedef enum {
   CURRENT_PATCH_PARSE,
   CURRENT_PATCH_PARSED,
   CURRENT_PATCH_CHANGED,
-  GOT_OTHER_SYSEX
   //EFFECT_ON_REQ,
   //EFFECT_ON_PENDING,
   //EFFECT_OFF_REQ,
@@ -119,6 +121,7 @@ bool queue_push(uint32_t new_task) {
 }
 
 // Get a task from the other core
+// core0 <-> core1
 // return true on success
 bool queue_pop(uint32_t* dest) {
   if (rp2040.fifo.available() > 0) {
@@ -194,16 +197,33 @@ void parse_patch() {
     int edtb_end = find_section_index("PPRM");
     int neff = unpacked.message[edtb_start] / 24;
     current_patch.n_effects = neff;
-    current_patch.cur_slot=0;
+    current_patch.cur_slot = 0;
     for (int i = 0; i < neff; i++) {
       long aux = unpacked.message[edtb_start + (7 + i * 24)] << 24 | unpacked.message[edtb_start + (6 + i * 24)] << 16 | unpacked.message[edtb_start + (5 + i * 24)] << 8 | unpacked.message[edtb_start + (4 + i * 24)];
       long id = (aux >> 1) & 0xfffffff;
       int index = get_effect_by_id(id);
+      bool state = aux & 1;
       if (index > -1) {
         current_patch.effects[i] = effects[index];
-        current_patch.slots[i]=current_patch.cur_slot;
-        current_patch.cur_slot+=effects[index].nslots;        
-        Serial1.printf("Effect %s with id %d uses %d slots and has %d parameters\r\n", current_patch.effects[i].fxname, id, current_patch.effects[i].nslots, current_patch.effects[i].nparam);
+        current_patch.states[i] = state;
+        current_patch.slots[i] = current_patch.cur_slot;
+        current_patch.delay[i] = false;
+        for (int j = 0; j < N_DELAYS; j++) {
+          if (delay_ids[j] == id) {
+            current_patch.delay[i] = true;
+            break;
+          }
+        }
+        current_patch.xpedal[i] = false;
+        for (int j = 0; j < N_X_PEDALS; j++) {
+          if (xpedal_ids[j] == id) {
+            current_patch.xpedal[i] = true;
+            break;
+          }
+        }
+
+        current_patch.cur_slot += effects[index].nslots;
+        Serial1.printf("Effect %s with id %d is %s uses %d slots and has %d parameters\r\n", current_patch.effects[i].fxname, id, state ? "enabled\0" : "disabled\0", current_patch.effects[i].nslots, current_patch.effects[i].nparam);
       }
     }
   }
@@ -219,36 +239,56 @@ void parse_sysex() {
   Serial1.println("");
   sysex_message.status = EMPTY;
   if (sysex_message.message[3] == 0x64) {
-    if (sysex_message.message[4] == 0x45) {
-      // Pedal sending current patch - IGNORE
-    } else if (sysex_message.message[4] == 0x03) {
+    if (sysex_message.message[4] == 0x03) {
       // Pedal informing of a change in patch/effect parameters
-      if (sysex_message.message[6] < 10) {
+      if (sysex_message.message[6] < 9) {
         //Change in fx parameter
         uint8_t fxslot = sysex_message.message[6];
-        uint8_t fxindex=0;
-        for (int i=0;i<current_patch.n_effects;i++){
-          if(current_patch.slots[i]==fxslot){
-            fxindex=i;
+        uint8_t fxindex = 0;
+        for (int i = 0; i < current_patch.n_effects; i++) {
+          if (current_patch.slots[i] == fxslot) {
+            fxindex = i;
             break;
           }
         }
         uint8_t param = sysex_message.message[7];
         if (param == 0) {
-          uint8_t value = sysex_message.message[8];
-          if (value == 1) {
-            Serial1.printf("%s turned on\r\n",current_patch.effects[fxindex].fxname);
-          } else {
-            Serial1.printf("%s turned off\r\n",current_patch.effects[fxindex].fxname);
-          }
-        }else if(param==1){
-          // Don't know what it is
-        }else{
-          param-=2;
-          Serial1.printf("Changed value of parameter %s\r\n",current_patch.effects[fxindex].params[param].parname);
+          // Toggled states
+          current_patch.states[fxindex] = sysex_message.message[8];
+        } else if (param == 1) {
+          // Don't know what it is, better refresh patch
+          // Patch/chain updated - better refresh
+          core0_task = CURRENT_PATCH_REQUEST;
+        } else {
+          // Changed parameter - ignore for now
+          param -= 2;
+          Serial1.printf("Changed value of parameter %s\r\n", current_patch.effects[fxindex].params[param].parname);
+        }
+      } else if (sysex_message.message[6] == 0x09) {
+        //Changed patch name - ignore for now
+      } else if (sysex_message.message[6] == 0x0a) {
+        if (sysex_message.message[7] == 0x02) {
+          // Changed global tempo
+          // TODO - Implement tap tempo
+          uint8_t low = sysex_message.message[8];
+          uint8_t high = sysex_message.message[9];
+          int tempo = high ? 128 + low : low;
+          Serial1.println(tempo);
+        } else if (sysex_message.message[7] == 0x0c) {
+          // Set tuner frequency - ignore
+        } else if (sysex_message.message[7] == 0x0f) {
+          // Toggle autosave - ignore
+        } else if (sysex_message.message[7] == 0x0) {
+          // Patch volume - ignore
         }
       }
+    } else if (sysex_message.message[4] == 0x12) {
+      // Patch/chain updated - better refresh model
+      core0_task = CURRENT_PATCH_REQUEST;
     }
+  } else if (sysex_message.message[3] == 0x45) {
+    // Pedal sending current patch - refresh model
+    core0_task = CURRENT_PATCH_REQUEST;
   }
 }
 
