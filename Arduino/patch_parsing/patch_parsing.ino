@@ -32,7 +32,8 @@ int sequence = 0;
 struct Patch {
   uint8_t cur_slot = 0;
   uint8_t n_effects = 0;
-  Effect effects[8];
+  uint8_t slots[5];
+  Effect effects[5];
 };
 
 Patch current_patch;
@@ -54,6 +55,7 @@ typedef enum {
   CONNECTED,
   READY,
   IDENTIFIED,
+  IDENTIFIED_NOT_SUPPORTED,
   EDITOR_ON
 } pedal_usb_state_t;
 
@@ -71,7 +73,9 @@ typedef enum {
   CURRENT_PATCH_UNPACK,
   CURRENT_PATCH_UNPACKED,
   CURRENT_PATCH_PARSE,
-  CURRENT_PATCH_PARSED
+  CURRENT_PATCH_PARSED,
+  CURRENT_PATCH_CHANGED,
+  GOT_OTHER_SYSEX
   //EFFECT_ON_REQ,
   //EFFECT_ON_PENDING,
   //EFFECT_OFF_REQ,
@@ -89,7 +93,6 @@ core_task_t core1_task = NONE;
 
 volatile pedal_usb_state_t usb_state = DISCONNECTED;
 
-//uint8_t sysex_message[1024];
 struct Sysex {
   uint8_t message[1024];
   int size = 0;
@@ -127,18 +130,145 @@ bool queue_pop(uint32_t* dest) {
 // CORE 0
 // handles functions other than USB communications (switches, displays, data parsing...)
 
+bool handle_identification() {
+  if (sysex_message.message[5] == 0x6e && sysex_message.message[6] == 0x00) {
+    uint8_t temp = sysex_message.message[7];
+    if (temp == 0x00) {
+      Serial1.println("G5n is currently unsupported");
+    } else if (temp == 0x02) {
+      Serial1.println("G3n is currently unsupported");
+    } else if (temp == 0x04) {
+      Serial1.println("G3Xn is currently unsupported");
+    } else if (temp == 0x0c) {
+      Serial1.println("This is a G1Four");
+      return true;
+    } else if (temp == 0x0d) {
+      Serial1.println("This is a G1XFour");
+      return true;
+    } else if (temp == 0x0e) {
+      Serial1.println("B1Four is currently unsupported");
+    } else if (temp == 0x0f) {
+      Serial1.println("B1XFour is currently unsupported");
+    } else if (temp == 0x10) {
+      Serial1.println("GCE-3 is currently unsupported");
+    } else if (temp == 0x11) {
+      Serial1.println("A1Four is currently unsupported");
+    } else if (temp == 0x12) {
+      Serial1.println("A1XFour is currently unsupported");
+    } else {
+      Serial1.println("Unidentified pedal");
+    }
+    return false;
+  }
+  return false;
+}
+
+int find_section_index(const char* section) {
+  for (int i = 0; i < unpacked.size; i++) {
+    if (unpacked.message[i] == section[0] && unpacked.message[i + 1] == section[1] && unpacked.message[i + 2] == section[2] && unpacked.message[i + 3] == section[3]) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+bool unpack(int start_byte) {
+  Sysex tounpack;
+  for (int i = start_byte; i < sysex_message.size; i++) {
+    tounpack.message[i - start_byte] = sysex_message.message[i];
+  }
+  unpacked.size = midi::decodeSysEx(tounpack.message, unpacked.message, sysex_message.size - start_byte);
+  if (unpacked.size > 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+void parse_patch() {
+  // Check if it is a Patch message (look PTCF at start)
+  if (find_section_index("PTCF") > -1) {
+    //Handle patch file
+    // Useful data is between EDTB and PPRM keywords
+    int edtb_start = find_section_index("EDTB") + 4;
+    int edtb_end = find_section_index("PPRM");
+    int neff = unpacked.message[edtb_start] / 24;
+    current_patch.n_effects = neff;
+    current_patch.cur_slot=0;
+    for (int i = 0; i < neff; i++) {
+      long aux = unpacked.message[edtb_start + (7 + i * 24)] << 24 | unpacked.message[edtb_start + (6 + i * 24)] << 16 | unpacked.message[edtb_start + (5 + i * 24)] << 8 | unpacked.message[edtb_start + (4 + i * 24)];
+      long id = (aux >> 1) & 0xfffffff;
+      int index = get_effect_by_id(id);
+      if (index > -1) {
+        current_patch.effects[i] = effects[index];
+        current_patch.slots[i]=current_patch.cur_slot;
+        current_patch.cur_slot+=effects[index].nslots;        
+        Serial1.printf("Effect %s with id %d uses %d slots and has %d parameters\r\n", current_patch.effects[i].fxname, id, current_patch.effects[i].nslots, current_patch.effects[i].nparam);
+      }
+    }
+  }
+  unpacked.size = 0;
+  sysex_message.size = 0;
+  sysex_message.status = EMPTY;
+}
+
+void parse_sysex() {
+  for (int i = 0; i < sysex_message.size; i++) {
+    Serial1.printf("%x ", sysex_message.message[i]);
+  }
+  Serial1.println("");
+  sysex_message.status = EMPTY;
+  if (sysex_message.message[3] == 0x64) {
+    if (sysex_message.message[4] == 0x45) {
+      // Pedal sending current patch - IGNORE
+    } else if (sysex_message.message[4] == 0x03) {
+      // Pedal informing of a change in patch/effect parameters
+      if (sysex_message.message[6] < 10) {
+        //Change in fx parameter
+        uint8_t fxslot = sysex_message.message[6];
+        uint8_t fxindex=0;
+        for (int i=0;i<current_patch.n_effects;i++){
+          if(current_patch.slots[i]==fxslot){
+            fxindex=i;
+            break;
+          }
+        }
+        uint8_t param = sysex_message.message[7];
+        if (param == 0) {
+          uint8_t value = sysex_message.message[8];
+          if (value == 1) {
+            Serial1.printf("%s turned on\r\n",current_patch.effects[fxindex].fxname);
+          } else {
+            Serial1.printf("%s turned off\r\n",current_patch.effects[fxindex].fxname);
+          }
+        }else if(param==1){
+          // Don't know what it is
+        }else{
+          param-=2;
+          Serial1.printf("Changed value of parameter %s\r\n",current_patch.effects[fxindex].params[param].parname);
+        }
+      }
+    }
+  }
+}
+
 void handle_core0_states_and_tasks() {
   //Waiting for other core tasks to complete
   if (core0_state == WAITING) {
     uint32_t other_core;
-    // check if tere is any new messages from the other core
+    // check if tere are any new messages from the other core
     if (queue_pop(&other_core)) {
       // New message arrived from core1
       if (core0_task == IDENTIFY_PENDING && other_core == IDENTIFY_RECEIVED) {
-        Serial1.println("Pedal identified");
+        Serial1.println("Pedal identification receive");
         core0_state = IDLE;
         core0_task = EDITOR_ON_REQUEST;
-        usb_state = IDENTIFIED;
+        //core0_task = NONE;
+        if (handle_identification()) {
+          usb_state = IDENTIFIED;
+        } else {
+          usb_state = IDENTIFIED_NOT_SUPPORTED;
+        }
         sysex_message.status = EMPTY;
       } else if (core0_task == EDITOR_ON_PENDING && other_core == EDITOR_ON_RECEIVED) {
         Serial1.println("Editor mode turned on");
@@ -161,6 +291,21 @@ void handle_core0_states_and_tasks() {
           core0_state = WAITING;
           core0_task = IDENTIFY_PENDING;
         }
+      } else if (usb_state == EDITOR_ON) {
+        uint32_t other_core;
+        // check if tere are any new messages from the other core
+        if (queue_pop(&other_core)) {
+          if (other_core == CURRENT_PATCH_CHANGED) {
+            core0_state = IDLE;
+            core0_task = CURRENT_PATCH_REQUEST;
+            sysex_message.status = EMPTY;
+          }
+        } else {
+          if (sysex_message.status == COMPLETE) {
+            parse_sysex();
+            //Something changed on the pedal
+          }
+        }
       }
     } else if (core0_task == EDITOR_ON_REQUEST) {
       if (usb_state == IDENTIFIED) {
@@ -181,15 +326,22 @@ void handle_core0_states_and_tasks() {
     } else if (core0_task == CURRENT_PATCH_UNPACK) {
       Serial1.println("Unpacking patch data");
       core0_state = BUSY;
-      unpack(4);
-      core0_state = IDLE;
-      core0_task = CURRENT_PATCH_PARSE;
+      if (unpack(4)) {
+        core0_state = IDLE;
+        core0_task = CURRENT_PATCH_PARSE;
+        sysex_message.status = EMPTY;
+      }
+
     } else if (core0_task == CURRENT_PATCH_PARSE) {
       Serial1.println("Parsing patch data");
       core0_state = BUSY;
       parse_patch();
       core0_state = IDLE;
       core0_task = CURRENT_PATCH_PARSED;
+    } else if (core0_task == CURRENT_PATCH_PARSED) {
+      Serial1.println("Entering idle mode");
+      core0_task = NONE;
+      core0_state = IDLE;
     }
   }
 }
@@ -222,55 +374,6 @@ void loop() {
   //   }
   // }
   handle_core0_states_and_tasks();
-}
-
-bool unpack(int start_byte) {
-  Sysex tounpack;
-  for (int i = start_byte; i < sysex_message.size; i++) {
-    tounpack.message[i - start_byte] = sysex_message.message[i];
-  }
-  unpacked.size = midi::decodeSysEx(tounpack.message, unpacked.message, sysex_message.size - start_byte);
-  if (unpacked.size > 0) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-void parse_patch() {
-  // Check if it is a Patch message (look PTCF at start)
-  uint8_t keyword[] = { 'P', 'T', 'C', 'F' };
-  if (find_section_index(keyword) > -1) {
-    //Handle patch file
-    // Useful data is between EDTB and PPRM keywords
-    uint8_t edtbk[] = { 'E', 'D', 'T', 'B' };
-    int edtb_start = find_section_index(edtbk) + 4;
-    uint8_t pprmk[] = { 'P', 'P', 'R', 'M' };
-    int edtb_end = find_section_index(pprmk);
-    int neff = unpacked.message[edtb_start] / 24;
-    current_patch.n_effects = neff;
-    for (int i = 0; i < neff; i++) {
-      long uniao = unpacked.message[edtb_start + (7 + i * 24)] << 24 | unpacked.message[edtb_start + (6 + i * 24)] << 16 | unpacked.message[edtb_start + (5 + i * 24)] << 8 | unpacked.message[edtb_start + (4 + i * 24)];
-      long id = (uniao >> 1) & 0xfffffff;
-      int index = get_effect_by_id(id);
-      if (index > -1) {
-        current_patch.effects[i] = effects[index];
-        Serial1.printf("Effect %s with id %d uses %d slots and has %d parameters\r\n", current_patch.effects[i].fxname, id, current_patch.effects[i].nslots, current_patch.effects[i].nparam);
-      }
-    }
-  }
-  unpacked.size = 0;
-  sysex_message.size = 0;
-  sysex_message.status = EMPTY;
-}
-
-int find_section_index(uint8_t* section) {
-  for (int i = 0; i < unpacked.size; i++) {
-    if (unpacked.message[i] == section[0] && unpacked.message[i + 1] == section[1] && unpacked.message[i + 2] == section[2] && unpacked.message[i + 3] == section[3]) {
-      return i;
-    }
-  }
-  return -1;
 }
 
 //--------------------------------------------------------------------+
@@ -322,6 +425,15 @@ void handle_core1_states_and_tasks() {
           core1_state = BUSY;
           send_sysex(patch_download_current, 4);
           core1_task = CURRENT_PATCH_REQUEST;
+        }
+      }
+    } else {
+      if (core1_task == NONE) {
+        if (pc_message.status == COMPLETE) {
+          Serial1.println("Got patch changed");
+          if (queue_push(CURRENT_PATCH_CHANGED)) {
+            pc_message.status = EMPTY;
+          }
         }
       }
     }
@@ -383,6 +495,32 @@ static void midi_host_task(void) {
   }
 }
 
+
+
+
+//--------------------------------------------------------------------+
+// TinyUSB Host callbacks
+//--------------------------------------------------------------------+
+void tuh_midi_mount_cb(uint8_t daddr, uint8_t in_ep, uint8_t out_ep, uint8_t num_cables_rx, uint16_t num_cables_tx) {
+  midi_dev_addr = daddr;
+  Serial1.println("device connected");
+}
+
+/// Invoked when device is unmounted (bus reset/unplugged)
+void tuh_umount_cb(uint8_t daddr) {
+  digitalWrite(LED_BUILTIN, LOW);
+  midi_dev_addr = 0;
+  usb_state = DISCONNECTED;
+  cloned = false;
+  device_mounted = false;
+  core0_state = IDLE;
+  core0_task = NONE;
+  core1_state = IDLE;
+  core1_task = NONE;
+  usb_state = DISCONNECTED;
+  Serial1.println("device disconnected");
+}
+
 void send_sysex(uint8_t* message, int size) {
   size += 2;
   uint8_t new_message[size];
@@ -440,30 +578,6 @@ void send_sysex(uint8_t* message, int size) {
   sysex_complete = true;
 }
 
-
-//--------------------------------------------------------------------+
-// TinyUSB Host callbacks
-//--------------------------------------------------------------------+
-void tuh_midi_mount_cb(uint8_t daddr, uint8_t in_ep, uint8_t out_ep, uint8_t num_cables_rx, uint16_t num_cables_tx) {
-  midi_dev_addr = daddr;
-  Serial1.println("device connected");
-}
-
-/// Invoked when device is unmounted (bus reset/unplugged)
-void tuh_umount_cb(uint8_t daddr) {
-  digitalWrite(LED_BUILTIN, LOW);
-  midi_dev_addr = 0;
-  usb_state = DISCONNECTED;
-  cloned = false;
-  device_mounted = false;
-  core0_state = IDLE;
-  core0_task = NONE;
-  core1_state = IDLE;
-  core1_task = NONE;
-  usb_state = DISCONNECTED;
-  Serial1.println("device disconnected");
-}
-
 void handle_sysex_rx_cb(uint8_t* packet, uint8_t cin) {
   if (cin == 4) {
     if (sysex_message.status == EMPTY) {
@@ -491,11 +605,12 @@ void handle_sysex_rx_cb(uint8_t* packet, uint8_t cin) {
 }
 
 void handle_cc_rx_cb() {
-  Serial1.println("CC received");
+  // Serial1.println("CC received");
 }
 
 void handle_pc_rx_cb() {
-  Serial1.println("PC received");
+  // Serial1.println("PC received");
+  pc_message.status = COMPLETE;
 }
 
 void tuh_midi_rx_cb(uint8_t dev_addr, uint32_t num_packets) {
@@ -530,8 +645,6 @@ void clone_descriptors(tuh_xfer_t* xfer) {
   }
 
   uint8_t const daddr = xfer->daddr;
-  //Set VID, PID
-  TinyUSBDevice.setID(desc_device.idVendor, desc_device.idProduct);
 
   device_mounted = true;
   usb_state = READY;
