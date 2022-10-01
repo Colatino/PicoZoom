@@ -83,7 +83,7 @@ void setup() {
     footswitch[i].last_state=HIGH;
     footswitch[i].last_time=0;    
     pinMode(footswitch[i].pin,INPUT_PULLUP);        
-    attachInterrupt(digitalPinToInterrupt(footswitch[i].pin),switch_action_isr,CHANGE);
+    attachInterrupt(digitalPinToInterrupt(footswitch[i].pin),switch_action_isr,RISING);
   }
 
   init_core1 = true;
