@@ -90,10 +90,7 @@ typedef enum {
   TOGGLE_EFFECT_REQUEST,
   TOGGLE_EFFECT_PENDING,
   TOGGLE_EFFECT_RECEIVED
-  //GETDELAYTEMPO,
-  //SETDELAYTEMPO,
-  //GETTEMPO
-  //SETTEMPO
+
 } core_task_t;
 
 core_state_t core0_state = IDLE;
