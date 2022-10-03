@@ -8,6 +8,8 @@
 // USB Host object
 Adafruit_USBH_Host USBHost;
 
+#include "oled.h"
+
 #include "g1xfour.h"
 
 #include "footswitch.h"
@@ -41,8 +43,11 @@ struct Patch {
 };
 
 #define NUM_PEDALS 1
-FootSwitch footswitch[NUM_PEDALS];
 int switch_pins[] = { 5 };
+FootSwitch footswitch[NUM_PEDALS];
+
+int buses;
+Oled oleds[NUM_PEDALS];
 
 Patch current_patch;
 
@@ -105,11 +110,6 @@ struct Sysex {
   message_state_t status = EMPTY;
 } sysex_message;
 
-struct CChange {
-  uint8_t message[2];
-  message_state_t status = EMPTY;
-} cc_message;
-
 struct PChange {
   uint8_t message[3];
   message_state_t status = EMPTY;
@@ -141,29 +141,29 @@ bool handle_identification() {
   if (sysex_message.message[5] == 0x6e && sysex_message.message[6] == 0x00) {
     uint8_t temp = sysex_message.message[7];
     if (temp == 0x00) {
-      Serial1.println("G5n is currently unsupported");
+      Serial.println("G5n is currently unsupported");
     } else if (temp == 0x02) {
-      Serial1.println("G3n is currently unsupported");
+      Serial.println("G3n is currently unsupported");
     } else if (temp == 0x04) {
-      Serial1.println("G3Xn is currently unsupported");
+      Serial.println("G3Xn is currently unsupported");
     } else if (temp == 0x0c) {
-      Serial1.println("This is a G1Four");
+      Serial.println("This is a G1Four");
       return true;
     } else if (temp == 0x0d) {
-      Serial1.println("This is a G1XFour");
+      Serial.println("This is a G1XFour");
       return true;
     } else if (temp == 0x0e) {
-      Serial1.println("B1Four is currently unsupported");
+      Serial.println("B1Four is currently unsupported");
     } else if (temp == 0x0f) {
-      Serial1.println("B1XFour is currently unsupported");
+      Serial.println("B1XFour is currently unsupported");
     } else if (temp == 0x10) {
-      Serial1.println("GCE-3 is currently unsupported");
+      Serial.println("GCE-3 is currently unsupported");
     } else if (temp == 0x11) {
-      Serial1.println("A1Four is currently unsupported");
+      Serial.println("A1Four is currently unsupported");
     } else if (temp == 0x12) {
-      Serial1.println("A1XFour is currently unsupported");
+      Serial.println("A1XFour is currently unsupported");
     } else {
-      Serial1.println("Unidentified pedal");
+      Serial.println("Unidentified pedal");
     }
     return false;
   }
@@ -227,7 +227,7 @@ void parse_patch() {
         }
 
         current_patch.cur_slot += effects[index].nslots;
-        Serial1.printf("Effect %s with id %d is %s uses %d slots and has %d parameters\r\n", current_patch.effects[i].fxname, id, state ? "enabled\0" : "disabled\0", current_patch.effects[i].nslots, current_patch.effects[i].nparam);
+        Serial.printf("Effect %s with id %d is %s uses %d slots and has %d parameters\r\n", current_patch.effects[i].fxname, id, state ? "enabled\0" : "disabled\0", current_patch.effects[i].nslots, current_patch.effects[i].nparam);
       }
     }
   }
@@ -238,9 +238,9 @@ void parse_patch() {
 
 void parse_sysex() {
   for (int i = 0; i < sysex_message.size; i++) {
-    Serial1.printf("%x ", sysex_message.message[i]);
+    Serial.printf("%x ", sysex_message.message[i]);
   }
-  Serial1.println("");
+  Serial.println("");
   sysex_message.status = EMPTY;
   if (sysex_message.message[3] == 0x64) {
     if (sysex_message.message[4] == 0x03) {
@@ -266,7 +266,7 @@ void parse_sysex() {
         } else {
           // Changed parameter - ignore for now
           param -= 2;
-          Serial1.printf("Changed value of parameter %s\r\n", current_patch.effects[fxindex].params[param].parname);
+          Serial.printf("Changed value of parameter %s\r\n", current_patch.effects[fxindex].params[param].parname);
         }
       } else if (sysex_message.message[6] == 0x09) {
         //Changed patch name - ignore for now
@@ -277,7 +277,7 @@ void parse_sysex() {
           uint8_t low = sysex_message.message[8];
           uint8_t high = sysex_message.message[9];
           int tempo = high ? 128 + low : low;
-          Serial1.println(tempo);
+          Serial.println(tempo);
         } else if (sysex_message.message[7] == 0x0c) {
           // Set tuner frequency - ignore
         } else if (sysex_message.message[7] == 0x0f) {
@@ -307,15 +307,15 @@ void handle_footswitch_states_and_tasks() {
   for (int i = 0; i < NUM_PEDALS; i++) {
     foot_switch_state_t temp_state = footswitch[i].task();
     uint8_t slot = current_patch.slots[i];
-    //Serial1.println(temp_state);
+    //Serial.println(temp_state);
     if (temp_state == HOLD || temp_state == HOLDB) {
       if (footswitch[i].got_tempo()) {
         // Send tempos to display
-        Serial1.println(footswitch[i].get_tempo());
+        Serial.println(footswitch[i].get_tempo());
       }
     } else if (temp_state == TOGGLE) {
       uint8_t state = current_patch.states[i];
-      Serial1.printf("Toggle effect %s on slot %d: %s\r\n", current_patch.effects[i].fxname, slot, state ? "off\0" : "on\0");
+      Serial.printf("Toggle effect %s on slot %d: %s\r\n", current_patch.effects[i].fxname, slot, state ? "off\0" : "on\0");
 
       toggle_effect[6] = slot;
       toggle_effect[9] = !state;
@@ -336,7 +336,7 @@ void handle_footswitch_states_and_tasks() {
         for (int j = 0; j < current_patch.effects[i].nparam; j++) {
           const char* pname = current_patch.effects[i].params[j].parname;
           if (temp_state == TEMPO && strcmp(pname, "Time") == 0 || strcmp(pname, "TimeA") == 0) {
-            Serial1.printf("Set delay time to %d ms high: %02x low:%02x\r\n", tempo, tempoHigh, tempoLow);
+            Serial.printf("Set delay time to %d ms high: %02x low:%02x\r\n", tempo, tempoHigh, tempoLow);
             set_param[7] = j + 2;
             // In case it is a dual delay
             if (strcmp(current_patch.effects[i].params[j].parname, "TimeA") == 0)
@@ -344,7 +344,7 @@ void handle_footswitch_states_and_tasks() {
 
             break;
           } else if (temp_state == TEMPOB && strcmp(pname, "TimeB") == 0) {
-            Serial1.printf("Set delay timeB to %d ms high: %02x low:%02x\r\n", tempo, tempoHigh, tempoLow);
+            Serial.printf("Set delay timeB to %d ms high: %02x low:%02x\r\n", tempo, tempoHigh, tempoLow);
             set_param[7] = j + 2;
             break;
           }
@@ -353,7 +353,7 @@ void handle_footswitch_states_and_tasks() {
         core0_task = SET_PARAM_REQUEST;
       } else {
         // Set global tempo
-        Serial1.printf("Setting global tempo to %d ms\r\n", footswitch[i].get_tempo());
+        Serial.printf("Setting global tempo to %d ms\r\n", footswitch[i].get_tempo());
         if (tempo < 250) {
           tempo = 250;
         } else if (tempo > 1500) {
@@ -376,8 +376,8 @@ void handle_footswitch_states_and_tasks() {
         // Set delay time on effect
         for (int j = 0; j < current_patch.effects[i].nparam; j++) {
           if (strcmp(current_patch.effects[i].params[j].parname, "TimeB") == 0) {
-            Serial1.printf("Param %d is TimeB\r\n", j);
-            Serial1.printf("Set delay timeB to %d ms\r\n", tempo);
+            Serial.printf("Param %d is TimeB\r\n", j);
+            Serial.printf("Set delay timeB to %d ms\r\n", tempo);
           }
         }
       }
@@ -393,7 +393,7 @@ void handle_core0_states_and_tasks() {
     if (core_queue_pop(&other_core)) {
       // New message arrived from core1
       if (core0_task == IDENTIFY_PENDING && other_core == IDENTIFY_RECEIVED) {
-        Serial1.println("Pedal identification receive");
+        Serial.println("Pedal identification receive");
         core0_state = IDLE;
         core0_task = EDITOR_ON_REQUEST;
         //core0_task = NONE;
@@ -404,21 +404,26 @@ void handle_core0_states_and_tasks() {
         }
         sysex_message.status = EMPTY;
       } else if (core0_task == EDITOR_ON_PENDING && other_core == EDITOR_ON_RECEIVED) {
-        Serial1.println("Editor mode turned on");
+        Serial.println("Editor mode turned on");
         core0_state = IDLE;
         core0_task = CURRENT_PATCH_REQUEST;
         usb_state = EDITOR_ON;
         sysex_message.status = EMPTY;
       } else if (core0_task == CURRENT_PATCH_PENDING && other_core == CURRENT_PATCH_RECEIVED) {
-        Serial1.println("Got current patch");
+        Serial.println("Got current patch");
         core0_state = IDLE;
         core0_task = CURRENT_PATCH_UNPACK;
       } else if (core0_task == TOGGLE_EFFECT_PENDING && other_core == TOGGLE_EFFECT_RECEIVED) {
-        Serial1.println("Effect toggled");
+        Serial.println("Effect toggled");
         core0_state = IDLE;
         core0_task = NONE;
+        for (int i = 0; i < NUM_PEDALS; i++) {
+          oleds[i].clear();
+          oleds[i].draw_effect(current_patch.effects[i].fxname, current_patch.states[i]);
+          oleds[i].draw();
+        }
       } else if (core0_task == SET_PARAM_PENDING && other_core == SET_PARAM_RECEIVED) {
-        Serial1.println("Param changed");
+        Serial.println("Param changed");
         core0_state = IDLE;
         core0_task = NONE;
       }
@@ -450,7 +455,7 @@ void handle_core0_states_and_tasks() {
       }
     } else if (core0_task == EDITOR_ON_REQUEST) {
       if (usb_state == IDENTIFIED) {
-        Serial1.println("Turn editor on");
+        Serial.println("Turn editor on");
         if (core_queue_push(EDITOR_ON_REQUEST)) {
           core0_state = WAITING;
           core0_task = EDITOR_ON_PENDING;
@@ -458,14 +463,14 @@ void handle_core0_states_and_tasks() {
       }
     } else if (core0_task == CURRENT_PATCH_REQUEST) {
       if (usb_state == EDITOR_ON) {
-        Serial1.println("Request current patch");
+        Serial.println("Request current patch");
         if (core_queue_push(CURRENT_PATCH_REQUEST)) {
           core0_state = WAITING;
           core0_task = CURRENT_PATCH_PENDING;
         }
       }
     } else if (core0_task == CURRENT_PATCH_UNPACK) {
-      Serial1.println("Unpacking patch data");
+      Serial.println("Unpacking patch data");
       core0_state = BUSY;
       if (unpack(4)) {
         core0_state = IDLE;
@@ -473,23 +478,28 @@ void handle_core0_states_and_tasks() {
         sysex_message.status = EMPTY;
       }
     } else if (core0_task == CURRENT_PATCH_PARSE) {
-      Serial1.println("Parsing patch data");
+      Serial.println("Parsing patch data");
       core0_state = BUSY;
       parse_patch();
       core0_state = IDLE;
       core0_task = CURRENT_PATCH_PARSED;
     } else if (core0_task == CURRENT_PATCH_PARSED) {
-      Serial1.println("Entering idle mode");
+      Serial.println("Entering idle mode");
       core0_task = NONE;
       core0_state = IDLE;
+      for (int i = 0; i < NUM_PEDALS; i++) {
+        oleds[i].clear();
+        oleds[i].draw_effect(current_patch.effects[i].fxname, current_patch.states[i]);
+        oleds[i].draw();
+      }
     } else if (core0_task == TOGGLE_EFFECT_REQUEST) {
-      Serial1.println("Request effect toggle");
+      Serial.println("Request effect toggle");
       if (core_queue_push(TOGGLE_EFFECT_REQUEST)) {
         core0_state = WAITING;
         core0_task = TOGGLE_EFFECT_PENDING;
       }
     } else if (core0_task == SET_PARAM_REQUEST) {
-      Serial1.println("Request  param change");
+      Serial.println("Request  param change");
       if (core_queue_push(SET_PARAM_REQUEST)) {
         core0_state = WAITING;
         core0_task = SET_PARAM_PENDING;
@@ -499,20 +509,30 @@ void handle_core0_states_and_tasks() {
 }
 
 void setup() {
-  Serial1.begin(115200);
-  while (!Serial1) {
+  Wire.setSDA(0);
+  Wire.setSCL(1);
+
+  Serial.begin(115200);
+  while (!Serial) {
   }
   pinMode(LED_BUILTIN, OUTPUT);
 
-  // Set Pins and ISRs
+  // Set Pins and ISRs for footswitches
   for (int i = 0; i < NUM_PEDALS; i++) {
     footswitch[i].begin(switch_pins[i], 100);
-    //pinMode(footswitch[i].pin,INPUT_PULLUP);
     attachInterrupt(digitalPinToInterrupt(switch_pins[i]), isr, FALLING);
   }
-  Serial1.print("Start core1...");
+
+  // Init displays
+  for (int i = 0; i < NUM_PEDALS; i++) {
+    oleds[i].begin();
+    oleds[i].clear();
+    oleds[i].draw_effect("Bypass", true);
+    oleds[i].draw();
+  }
+
+  Serial.print("Start core1...");
   init_core1 = true;
-  //Serial1.println(g1xfour.get_n_effects());
 }
 
 void loop() {
@@ -528,7 +548,7 @@ void setup1() {
   while (!init_core1) {
     //wait for core0 to initialize
   }
-  Serial1.print("setup1...");
+  Serial.print("setup1...");
   pio_usb_configuration_t pio_cfg = PIO_USB_DEFAULT_CONFIG;
   pio_cfg.pin_dp = HOST_PIN_DP;
   USBHost.configure_pio_usb(1, &pio_cfg);
@@ -537,7 +557,7 @@ void setup1() {
   // Note: For rp2040 pico-pio-usb, calling USBHost.begin() on core1 will have most of the
   // host bit-banging processing works done in core1 to free up core0 for other works
   USBHost.begin(1);
-  Serial1.println("done");
+  Serial.println("done");
   core1_state = WAITING;
 }
 
@@ -554,27 +574,27 @@ void handle_core1_states_and_tasks() {
     if (core_queue_pop(&new_task)) {
       if (core1_task == NONE) {
         if (new_task == IDENTIFY_REQUEST) {
-          Serial1.println("Sending identify request");
+          Serial.println("Sending identify request");
           core1_state = BUSY;
           send_sysex(whoareyou, 4);
           core1_task = IDENTIFY_REQUEST;
         } else if (new_task == EDITOR_ON_REQUEST) {
-          Serial1.println("Sending editor on request");
+          Serial.println("Sending editor on request");
           core1_state = BUSY;
           send_sysex(editoron, 4);
           core1_task = EDITOR_ON_REQUEST;
         } else if (new_task == CURRENT_PATCH_REQUEST) {
-          Serial1.println("Sending current patch request");
+          Serial.println("Sending current patch request");
           core1_state = BUSY;
           send_sysex(patch_download_current, 4);
           core1_task = CURRENT_PATCH_REQUEST;
         } else if (new_task == TOGGLE_EFFECT_REQUEST) {
-          Serial1.println("Toggling effect");
+          Serial.println("Toggling effect");
           core1_state = BUSY;
           send_sysex(toggle_effect, 13);
           core1_task = TOGGLE_EFFECT_REQUEST;
         } else if (new_task == SET_PARAM_REQUEST) {
-          Serial1.println("Changing param");
+          Serial.println("Changing param");
           core1_state = BUSY;
           send_sysex(set_param, 13);
           core1_task = SET_PARAM_REQUEST;
@@ -583,7 +603,7 @@ void handle_core1_states_and_tasks() {
     } else {
       if (core1_task == NONE) {
         if (pc_message.status == COMPLETE) {
-          Serial1.println("Got patch changed");
+          Serial.println("Got patch changed");
           if (core_queue_push(CURRENT_PATCH_CHANGED)) {
             pc_message.status = EMPTY;
           }
@@ -672,7 +692,7 @@ static void midi_host_task(void) {
 //--------------------------------------------------------------------+
 void tuh_midi_mount_cb(uint8_t daddr, uint8_t in_ep, uint8_t out_ep, uint8_t num_cables_rx, uint16_t num_cables_tx) {
   midi_dev_addr = daddr;
-  Serial1.println("device connected");
+  Serial.println("device connected");
 }
 
 /// Invoked when device is unmounted (bus reset/unplugged)
@@ -687,7 +707,7 @@ void tuh_umount_cb(uint8_t daddr) {
   core1_state = IDLE;
   core1_task = NONE;
   usb_state = DISCONNECTED;
-  Serial1.println("device disconnected");
+  Serial.println("device disconnected");
 }
 
 void send_sysex(uint8_t* message, int size) {
@@ -703,9 +723,9 @@ void send_sysex(uint8_t* message, int size) {
 
   //size += 2;
   for (int i = 0; i < size; i++) {
-    Serial1.printf("%x ", new_message[i]);
+    Serial.printf("%x ", new_message[i]);
   }
-  Serial1.println("");
+  Serial.println("");
 
   int numpackets = ceil((double)size / 3.0);
   uint8_t packet[4];
@@ -774,11 +794,11 @@ void handle_sysex_rx_cb(uint8_t* packet, uint8_t cin) {
 }
 
 void handle_cc_rx_cb() {
-  // Serial1.println("CC received");
+  // Serial.println("CC received");
 }
 
 void handle_pc_rx_cb() {
-  // Serial1.println("PC received");
+  // Serial.println("PC received");
   pc_message.status = COMPLETE;
 }
 
