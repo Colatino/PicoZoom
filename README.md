@@ -7,7 +7,7 @@ The purpose of this project is to build an auxiliary pedal controller to be used
 
 This project wouldn't be possible without [zoom-zt2](https://github.com/mungewell/zoom-zt2) and [ZoomPedalFun](https://github.com/shooking/ZoomPedalFun).
 
-## BILL OF MATERIALS
+# BILL OF MATERIALS
 - 1 x Raspberry Pi Pico
 - 5 x SSD1306 0.91" oled displays
 - 1 x TC9548A
