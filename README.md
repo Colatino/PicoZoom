@@ -29,13 +29,11 @@ This project makes use of the following libraries:
   - [x] Get pedal model/vid/pid
   - [x] Get current patch
     - [x] Get current patch effects state (on/off)
-    - [ ] Set current patch effect state (on/off)
-    - [ ] Detect if there is a delay effect on patch
-      - [ ] Get delay tempo
-      - [ ] Set delay tempo (tap tempo?)
-  - [ ] Get global tempo
-  - [ ] Set global tempo (tap tempo?)
-- [ ] Handle footswitch press
+    - [x] Set current patch effect state (on/off)
+    - [x] Detect if there is a delay effect on patch
+      - [x] Implement tap tempo
+  - [x] Implement global tap tempo (global BPM)
+- [x] Handle footswitch press
 - [ ] Handle OLEDs
 - [ ] Create wiring diagram
 - [ ] Write a step-by-step
