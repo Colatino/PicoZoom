@@ -29,14 +29,14 @@ This project makes use of the following libraries:
   - [x] Get pedal model/vid/pid
   - [x] Get current patch
     - [x] Get current patch effects state (on/off)
-    - [x] Set current patch effect state (on/off)
-    - [x] Detect if there is a delay effect on patch
-      - [x] Implement tap tempo
-  - [x] Implement global tap tempo (global BPM)
+    - [x] Set current patch effect state (on/off)    
+    - [x] Implement tap tempo
+  - [x] Implement change global BPM
 - [x] Handle footswitch press
 - [x] Handle OLEDs
-- [ ] Create wiring diagram
-- [ ] Write a step-by-step
+- [x] Create wiring diagram
+- [ ] Test everything
+- [ ] Write a step-by-step guide
 - [ ] Record and publish sample videos
 - [ ] Improve README
 - [ ] Support other Zoom pedals
