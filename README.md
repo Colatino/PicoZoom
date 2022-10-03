@@ -22,6 +22,9 @@ This project makes use of the following libraries:
 - [Adafruit_SSD1306](https://github.com/adafruit/Adafruit_SSD1306) and its dependencies
 - [Arduino MIDI](https://github.com/FortySevenEffects/arduino_midi_library)
 
+## WIRING DIAGRAM
+![image](https://github.com/Colatino/PicoZoom/blob/main/Fritzing/wiring.png)
+
 ## ROADMAP
 - [x] Ensure USB communications
 - [x] Detect pedal plug/unplug
