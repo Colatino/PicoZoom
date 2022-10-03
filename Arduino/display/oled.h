@@ -29,6 +29,7 @@ public:
   void clear();
   void draw();
   void set_redraw();
+  void draw_tempo(int tempo);
 };
 
 #endif

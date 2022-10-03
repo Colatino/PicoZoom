@@ -30,7 +30,7 @@ foot_switch_state_t FootSwitch::task() {
         _state = HOLD;
         _time = millis();
         _tempo = 0;
-        Serial1.println("HOLD");
+        Serial.println("HOLD");
       }
     } else {
       if (millis() - _time > _debounce_time) {

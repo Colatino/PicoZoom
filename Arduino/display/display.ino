@@ -259,6 +259,9 @@ void parse_sysex() {
         if (param == 0) {
           // Toggled states
           current_patch.states[fxindex] = sysex_message.message[8];
+          oleds[fxindex].clear();
+          oleds[fxindex].draw_effect(current_patch.effects[fxindex].fxname, current_patch.states[fxindex]);
+          oleds[fxindex].draw();
         } else if (param == 1) {
           // Don't know what it is, better refresh patch
           // Patch/chain updated - better refresh
@@ -309,8 +312,13 @@ void handle_footswitch_states_and_tasks() {
     uint8_t slot = current_patch.slots[i];
     //Serial.println(temp_state);
     if (temp_state == HOLD || temp_state == HOLDB) {
+      unsigned long new_tempo;
       if (footswitch[i].got_tempo()) {
+        new_tempo = footswitch[i].get_tempo();
         // Send tempos to display
+        oleds[i].clear();
+        oleds[i].draw_tempo(new_tempo);
+        oleds[i].draw();
         Serial.println(footswitch[i].get_tempo());
       }
     } else if (temp_state == TOGGLE) {
@@ -322,52 +330,64 @@ void handle_footswitch_states_and_tasks() {
       core0_state = IDLE;
       core0_task = TOGGLE_EFFECT_REQUEST;
     } else if (temp_state == TEMPO || temp_state == TEMPOB) {
-      unsigned long tempo = footswitch[i].get_tempo();
-      uint8_t tempoLow = (tempo - 1) % 128;
-      uint8_t tempoHigh = (tempo - 1) / 128;
-      // If footswitch is linked to a delay
-      if (current_patch.delay[i]) {
-        // Set delay time on effect
-        set_param[6] = slot;
-        //set_param[7] = j;
-        set_param[8] = tempoLow;
-        set_param[9] = tempoHigh;
+      int tempo = footswitch[i].get_tempo();
+      if (tempo > 0) {
+        uint8_t tempoLow = (tempo - 1) % 128;
+        uint8_t tempoHigh = (tempo - 1) / 128;
+        // If footswitch is linked to a delay
+        if (current_patch.delay[i]) {
+          // Set delay time on effect
+          set_param[6] = slot;
+          //set_param[7] = j;
+          set_param[8] = tempoLow;
+          set_param[9] = tempoHigh;
 
-        for (int j = 0; j < current_patch.effects[i].nparam; j++) {
-          const char* pname = current_patch.effects[i].params[j].parname;
-          if (temp_state == TEMPO && strcmp(pname, "Time") == 0 || strcmp(pname, "TimeA") == 0) {
-            Serial.printf("Set delay time to %d ms high: %02x low:%02x\r\n", tempo, tempoHigh, tempoLow);
-            set_param[7] = j + 2;
-            // In case it is a dual delay
-            if (strcmp(current_patch.effects[i].params[j].parname, "TimeA") == 0)
-              footswitch[i].set_tempo_b();
-
-            break;
-          } else if (temp_state == TEMPOB && strcmp(pname, "TimeB") == 0) {
-            Serial.printf("Set delay timeB to %d ms high: %02x low:%02x\r\n", tempo, tempoHigh, tempoLow);
-            set_param[7] = j + 2;
-            break;
+          for (int j = 0; j < current_patch.effects[i].nparam; j++) {
+            const char* pname = current_patch.effects[i].params[j].parname;
+            if (temp_state == TEMPO && strcmp(pname, "Time") == 0 || strcmp(pname, "TimeA") == 0) {
+              Serial.printf("Set delay time to %d ms high: %02x low:%02x\r\n", tempo, tempoHigh, tempoLow);
+              set_param[7] = j + 2;
+              // In case it is a dual delay
+              if (strcmp(current_patch.effects[i].params[j].parname, "TimeA") == 0)
+                footswitch[i].set_tempo_b();
+              // Send tempos to display
+              oleds[i].clear();
+              oleds[i].draw_tempo(tempo);
+              oleds[i].draw();
+              break;
+            } else if (temp_state == TEMPOB && strcmp(pname, "TimeB") == 0) {
+              Serial.printf("Set delay timeB to %d ms high: %02x low:%02x\r\n", tempo, tempoHigh, tempoLow);
+              set_param[7] = j + 2;
+              break;
+            }
           }
+          core0_state = IDLE;
+          core0_task = SET_PARAM_REQUEST;
+        } else {
+          // Set global tempo
+
+          Serial.printf("Setting global tempo to %d ms\r\n", tempo);
+          if (tempo < 250) {
+            tempo = 250;
+          } else if (tempo > 1500) {
+            tempo = 1500;
+          }
+          uint8_t bpm = 60000 / tempo;
+          uint8_t bpmLow = bpm % 128;
+          uint8_t bpmHigh = bpm / 128;
+          set_param[6] = 0x0a;
+          set_param[7] = 0x02;
+          set_param[8] = bpmLow;
+          set_param[9] = bpmHigh;
+          oleds[i].clear();
+          oleds[i].draw_tempo(bpm);
+          oleds[i].draw();
+          core0_state = IDLE;
+          core0_task = SET_PARAM_REQUEST;
         }
-        core0_state = IDLE;
-        core0_task = SET_PARAM_REQUEST;
       } else {
-        // Set global tempo
-        Serial.printf("Setting global tempo to %d ms\r\n", footswitch[i].get_tempo());
-        if (tempo < 250) {
-          tempo = 250;
-        } else if (tempo > 1500) {
-          tempo = 1500;
-        }
-        uint8_t bpm = 60000 / tempo;
-        uint8_t bpmLow = bpm % 128;
-        uint8_t bpmHigh = bpm / 128;
-        set_param[6] = 0x0a;
-        set_param[7] = 0x02;
-        set_param[8] = bpmLow;
-        set_param[9] = bpmHigh;
         core0_state = IDLE;
-        core0_task = SET_PARAM_REQUEST;
+        core0_task = NONE;
       }
     } else if (temp_state == TEMPOB) {
       unsigned long tempo = footswitch[i].get_tempo();

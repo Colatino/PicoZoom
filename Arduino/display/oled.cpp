@@ -51,7 +51,7 @@ void Oled::draw_text(const char *text) {
     if (w <= SCREEN_WIDTH - 10) {
       break;
     }
-    if (w >= SCREEN_WIDTH-10) {
+    if (w >= SCREEN_WIDTH - 10) {
       xscale--;
     }
     // if (h > SCREEN_HEIGHT) {
@@ -68,8 +68,21 @@ void Oled::draw_text(const char *text) {
   _display.fillRect(cursorx - 1, cursory, w, h, SSD1306_BLACK);
 
   // Centralize text
-  _display.setCursor(cursorx, cursory+1);
+  _display.setCursor(cursorx, cursory + 1);
   _display.println(text);
+}
+
+void Oled::draw_tempo(int tempo) {
+  _display.setTextColor(SSD1306_WHITE);
+
+  // Text size variables
+  uint16_t w, h;
+  int16_t x1, y1;
+  _display.setTextSize(2);
+
+  // Centralize text
+  _display.setCursor(5, 0);
+  _display.println(tempo);
 }
 
 void Oled::clear() {
@@ -79,9 +92,9 @@ void Oled::clear() {
 void Oled::draw() {
   Oled::select_bus();
   _display.display();
-  _redraw=false;
+  _redraw = false;
 }
 
-void Oled::set_redraw(){
-  _redraw=true;
+void Oled::set_redraw() {
+  _redraw = true;
 }
