@@ -3,9 +3,11 @@ A MIDI controller for Zoom pedals based on the Raspberry pi Pico.
  
 This project is the microcontroler version of the [one](https://github.com/Colatino/ZeroPedal) I've built with a Raspberry Pi Zero
 
-The purpose of this project is to build an auxiliary pedal controller to be used with Zoom multi-effects processors like the G1XFour (tested with this model) and be able to toggle individual effects on/off, add tap-tempo functionality, among other possible features.
+The purpose of this project is to build an auxiliary pedal controller to be used with Zoom multi-effects processors like the G1XFour (tested with this model) and be able to toggle individual effects on/off, add a tap-tempo functionality, among other possible features.
 
 This project wouldn't be possible without [zoom-zt2](https://github.com/mungewell/zoom-zt2) and [ZoomPedalFun](https://github.com/shooking/ZoomPedalFun).
+
+## HOW TO BUILD ONE
 
 ### BILL OF MATERIALS
 - 1 x Raspberry Pi Pico
@@ -23,6 +25,7 @@ This project makes use of the following libraries:
 - [Arduino MIDI](https://github.com/FortySevenEffects/arduino_midi_library)
 
 ### WIRING DIAGRAM
+The wiring diagram is displayed here and the fritzing file is available in its own folder.
 ![image](https://github.com/Colatino/PicoZoom/blob/main/Fritzing/wiring.png)
 
 ### ROADMAP
@@ -33,7 +36,7 @@ This project makes use of the following libraries:
   - [x] Get current patch
     - [x] Get current patch effects state (on/off)
     - [x] Set current patch effect state (on/off)    
-    - [x] Implement tap tempo
+  - [x] Implement tap tempo
   - [x] Implement change global BPM
 - [x] Handle footswitch press
 - [x] Handle OLEDs
@@ -41,4 +44,4 @@ This project makes use of the following libraries:
 - [ ] Write a step-by-step guide
 - [ ] Record and publish sample videos
 - [ ] Improve README
-- [ ] Support other Zoom pedals
+- [ ] Support other Zoom pedals?
