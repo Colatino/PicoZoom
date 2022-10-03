@@ -34,7 +34,7 @@ This project makes use of the following libraries:
       - [x] Implement tap tempo
   - [x] Implement global tap tempo (global BPM)
 - [x] Handle footswitch press
-- [ ] Handle OLEDs
+- [x] Handle OLEDs
 - [ ] Create wiring diagram
 - [ ] Write a step-by-step
 - [ ] Record and publish sample videos
