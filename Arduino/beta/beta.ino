@@ -331,10 +331,10 @@ void handle_footswitch_states_and_tasks() {
         oleds[i].clear();
         if (current_patch.delay[i]) {
           // Draw delay tempo
-          oleds[i].draw_tempo(new_tempo);
+          oleds[i].draw_tempo(new_tempo,"ms");
         } else {
           // Draw  global BPM
-          oleds[i].draw_tempo(60000 / new_tempo);
+          oleds[i].draw_tempo(60000 / new_tempo,"bpm");
         }
         oleds[i].draw();
         Serial.println(new_tempo);
@@ -372,7 +372,7 @@ void handle_footswitch_states_and_tasks() {
                 footswitch[i].set_tempo_b();
               // Send tempos to display
               oleds[i].clear();
-              oleds[i].draw_tempo(tempo);
+              oleds[i].draw_tempo(tempo,"ms");
               oleds[i].draw();
               break;
             } else if (temp_state == TEMPOB && strcmp(pname, "TimeB") == 0) {
@@ -400,7 +400,7 @@ void handle_footswitch_states_and_tasks() {
           set_param[8] = bpmLow;
           set_param[9] = bpmHigh;
           oleds[i].clear();
-          oleds[i].draw_tempo(bpm);
+          oleds[i].draw_tempo(bpm,"bpm");
           oleds[i].draw();
           core0_state = IDLE;
           core0_task = SET_PARAM_REQUEST;

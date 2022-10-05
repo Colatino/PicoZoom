@@ -72,9 +72,10 @@ void Oled::draw_text(const char *text) {
   _display.println(text);
 }
 
-void Oled::draw_tempo(int tempo) {
+void Oled::draw_tempo(int tempo,const char* sufix) {
   String helper=String(tempo);
-  helper.concat(" ms");
+  helper.concat(" ");
+  helper.concat(sufix);
   Serial.println(tempo);
   _display.setTextColor(SSD1306_WHITE);
 
