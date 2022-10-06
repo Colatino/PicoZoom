@@ -42,11 +42,11 @@ struct Patch {
   Effect effects[5];
 };
 
-#define NUM_PEDALS 1
-int switch_pins[] = { 5 };
+#define NUM_PEDALS 5
+int switch_pins[] = { 5, 6, 7, 8, 9 };
 FootSwitch footswitch[NUM_PEDALS];
 
-int buses;
+int buses[] = { 7, 5, 4, 3, 2 };
 Oled oleds[NUM_PEDALS];
 
 Patch current_patch;
@@ -236,6 +236,32 @@ void parse_patch() {
   sysex_message.status = EMPTY;
 }
 
+void set_effect_toggled(uint8_t fxslot, uint8_t param, bool state) {
+  //Change in fx parameter
+  uint8_t fxindex = 0;
+  for (int i = 0; i < current_patch.n_effects; i++) {
+    if (current_patch.slots[i] == fxslot) {
+      fxindex = i;
+      break;
+    }
+  }
+  if (param == 0) {
+    // Toggled states
+    current_patch.states[fxindex] = state;
+    oleds[fxindex].clear();
+    oleds[fxindex].draw_effect(current_patch.effects[fxindex].fxname, current_patch.states[fxindex]);
+    oleds[fxindex].draw();
+  } else if (param == 1) {
+    // Don't know what it is, better refresh patch
+    // Patch/chain updated - better refresh
+    core0_task = CURRENT_PATCH_REQUEST;
+  } else {
+    // Changed parameter - ignore for now
+    param -= 2;
+    Serial.printf("Changed value of parameter %s\r\n", current_patch.effects[fxindex].params[param].parname);
+  }
+}
+
 void parse_sysex() {
   for (int i = 0; i < sysex_message.size; i++) {
     Serial.printf("%x ", sysex_message.message[i]);
@@ -243,38 +269,49 @@ void parse_sysex() {
   Serial.println("");
   sysex_message.status = EMPTY;
   if (sysex_message.message[3] == 0x64) {
+
     if (sysex_message.message[4] == 0x03) {
+      // Seems that 5th byte = 1 whem pedal answers
       // Pedal informing of a change in patch/effect parameters
       if (sysex_message.message[6] < 9) {
         //Change in fx parameter
-        uint8_t fxslot = sysex_message.message[6];
-        uint8_t fxindex = 0;
-        for (int i = 0; i < current_patch.n_effects; i++) {
-          if (current_patch.slots[i] == fxslot) {
-            fxindex = i;
-            break;
-          }
-        }
-        uint8_t param = sysex_message.message[7];
-        if (param == 0) {
-          // Toggled states
-          current_patch.states[fxindex] = sysex_message.message[8];
-          oleds[fxindex].clear();
-          oleds[fxindex].draw_effect(current_patch.effects[fxindex].fxname, current_patch.states[fxindex]);
-          oleds[fxindex].draw();
-        } else if (param == 1) {
-          // Don't know what it is, better refresh patch
-          // Patch/chain updated - better refresh
-          core0_task = CURRENT_PATCH_REQUEST;
-        } else {
-          // Changed parameter - ignore for now
-          param -= 2;
-          Serial.printf("Changed value of parameter %s\r\n", current_patch.effects[fxindex].params[param].parname);
-        }
+        set_effect_toggled(sysex_message.message[6], sysex_message.message[7], sysex_message.message[8]);
+        // uint8_t fxindex = 0;
+        // for (int i = 0; i < current_patch.n_effects; i++) {
+        //   if (current_patch.slots[i] == fxslot) {
+        //     fxindex = i;
+        //     break;
+        //   }
+        // }
+        // uint8_t param = sysex_message.message[7];
+        // if (param == 0) {
+        //   // Toggled states
+        //   current_patch.states[fxindex] = sysex_message.message[8];
+        //   oleds[fxindex].clear();
+        //   oleds[fxindex].draw_effect(current_patch.effects[fxindex].fxname, current_patch.states[fxindex]);
+        //   oleds[fxindex].draw();
+        // } else if (param == 1) {
+        //   // Don't know what it is, better refresh patch
+        //   // Patch/chain updated - better refresh
+        //   core0_task = CURRENT_PATCH_REQUEST;
+        // } else {
+        //   // Changed parameter - ignore for now
+        //   param -= 2;
+        //   Serial.printf("Changed value of parameter %s\r\n", current_patch.effects[fxindex].params[param].parname);
+        // }
       } else if (sysex_message.message[6] == 0x09) {
         //Changed patch name - ignore for now
       } else if (sysex_message.message[6] == 0x0a) {
-        if (sysex_message.message[7] == 0x02) {
+        if (sysex_message.message[7] == 0x01) {
+          // Discard untill next 0x52
+          for (int k = 7; k < sysex_message.size; k++) {
+            if (sysex_message.message[k] == 0x52 && sysex_message.message[k + 2] == 0x6e && sysex_message.message[k + 3] == 0x64 && sysex_message.message[k + 4] == 0x03) {
+              set_effect_toggled(sysex_message.message[k + 6], sysex_message.message[k + 7], sysex_message.message[k + 8]);
+              break;
+            }
+          }
+
+        } else if (sysex_message.message[7] == 0x02) {
           // Changed global tempo
           // TODO - Implement tap tempo
           uint8_t low = sysex_message.message[8];
@@ -314,12 +351,12 @@ void handle_footswitch_states_and_tasks() {
     if (temp_state == TAP) {
       if (current_patch.delay[i]) {
         oleds[i].clear();
-        oleds[i].draw_text("Tap tempo");
+        oleds[i].draw_text("TAP TEMPO");
         oleds[i].draw();
         delay(500);
       } else {
         oleds[i].clear();
-        oleds[i].draw_text("Global bpm");
+        oleds[i].draw_text("GLOBAL BPM");
         oleds[i].draw();
         delay(500);
       }
@@ -331,10 +368,12 @@ void handle_footswitch_states_and_tasks() {
         oleds[i].clear();
         if (current_patch.delay[i]) {
           // Draw delay tempo
-          oleds[i].draw_tempo(new_tempo,"ms");
+          oleds[i].draw_tempo(new_tempo, "ms");
         } else {
           // Draw  global BPM
-          oleds[i].draw_tempo(60000 / new_tempo,"bpm");
+          int bpm = 60000 / new_tempo;
+          bpm = bpm < 40 ? 40 : (bpm > 250 ? 250 : bpm);
+          oleds[i].draw_tempo(bpm, "bpm");
         }
         oleds[i].draw();
         Serial.println(new_tempo);
@@ -372,7 +411,7 @@ void handle_footswitch_states_and_tasks() {
                 footswitch[i].set_tempo_b();
               // Send tempos to display
               oleds[i].clear();
-              oleds[i].draw_tempo(tempo,"ms");
+              oleds[i].draw_tempo(tempo, "ms");
               oleds[i].draw();
               break;
             } else if (temp_state == TEMPOB && strcmp(pname, "TimeB") == 0) {
@@ -400,7 +439,7 @@ void handle_footswitch_states_and_tasks() {
           set_param[8] = bpmLow;
           set_param[9] = bpmHigh;
           oleds[i].clear();
-          oleds[i].draw_tempo(bpm,"bpm");
+          oleds[i].draw_tempo(bpm, "bpm");
           oleds[i].draw();
           core0_state = IDLE;
           core0_task = SET_PARAM_REQUEST;
@@ -564,13 +603,13 @@ void setup() {
 
   // Set Pins and ISRs for footswitches
   for (int i = 0; i < NUM_PEDALS; i++) {
-    footswitch[i].begin(switch_pins[i], 100);
+    footswitch[i].begin(switch_pins[i], 250);
     attachInterrupt(digitalPinToInterrupt(switch_pins[i]), isr, FALLING);
   }
 
   // Init displays
   for (int i = 0; i < NUM_PEDALS; i++) {
-    oleds[i].begin();
+    oleds[i].begin(buses[i]);
     oleds[i].clear();
     oleds[i].draw_effect("Bypass", true);
     oleds[i].draw();
@@ -752,6 +791,11 @@ void tuh_umount_cb(uint8_t daddr) {
   core1_state = IDLE;
   core1_task = NONE;
   usb_state = DISCONNECTED;
+  for (int i=0;i<NUM_PEDALS;i++){
+    oleds[i].clear();
+    oleds[i].draw_effect("Bypass", false);
+    oleds[i].draw();
+  }
   Serial.println("device disconnected");
 }
 

@@ -12,7 +12,7 @@
 #define OLED_RESET -1        // Reset pin # (or -1 if sharing Arduino reset pin)
 #define SCREEN_ADDRESS 0x3C  ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 
-#define TCA9548A false      // true if TCA9548A multiplexer is used
+#define TCA9548A true      // true if TCA9548A multiplexer is used
 #define TCA9548A_ADDR 0x70  // Multiplexer I2C address
 
 class Oled {
