@@ -41,7 +41,7 @@ The wiring diagram is displayed here and the fritzing file is available in its o
 - [x] Handle footswitch press
 - [x] Handle OLEDs
 - [x] Create wiring diagram
+- [x] Record and publish sample videos
 - [ ] Write a step-by-step guide
-- [ ] Record and publish sample videos
 - [ ] Improve README
 - [ ] Support other Zoom pedals?
