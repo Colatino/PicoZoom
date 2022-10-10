@@ -1,21 +1,23 @@
 #include "oled.h"
 
 // Constructor
-Oled::Oled()
-  : _display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET) {}
+Oled::Oled() {}
+//: _display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET) {}
 
 void Oled::begin() {
+  _display = Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
   _display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS);
 }
 
 void Oled::begin(int bus) {
   _bus = bus;
-  Serial.printf("Starting oled on bus %d\r\n",bus);
-  //Oled::select_bus();
+  _display = Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+  Oled::select_bus();
 
-  if(!_display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)){
-    Serial.printf("Failed to initialize oled on bus %d\r\n",bus);
+  if (!_display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
+    //Serial.printf("Failed to initialize oled on bus %d\r\n",bus);
   }
+  //Serial.println("Started");
 }
 
 void Oled::select_bus() {
@@ -28,6 +30,7 @@ void Oled::select_bus() {
 }
 
 void Oled::draw_effect(const char *fxname, bool state) {
+  //Serial.printf("Drawing effect on display at bus %d\r\n",_bus);
   if (state)
     _display.fillRect(0, 3 * SCREEN_HEIGHT / 8, SCREEN_WIDTH, SCREEN_HEIGHT / 4, SSD1306_WHITE);
 
@@ -75,11 +78,11 @@ void Oled::draw_text(const char *text) {
   _display.println(text);
 }
 
-void Oled::draw_tempo(int tempo,const char* sufix) {
-  String helper=String(tempo);
+void Oled::draw_tempo(int tempo, const char *sufix) {
+  String helper = String(tempo);
   helper.concat(" ");
   helper.concat(sufix);
-  Serial.println(tempo);
+  ////Serial.println(tempo);
   _display.setTextColor(SSD1306_WHITE);
 
   // Text size variables
@@ -99,7 +102,12 @@ void Oled::clear() {
 void Oled::draw() {
   Oled::select_bus();
   _display.display();
+  //Serial.println("Drawn");
   _redraw = false;
+}
+
+bool Oled::get_redraw() {
+  return _redraw;
 }
 
 void Oled::set_redraw() {

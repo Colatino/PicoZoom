@@ -29,6 +29,7 @@ public:
   void clear();
   void draw();
   void set_redraw();
+  bool get_redraw();
   void draw_tempo(int tempo,const char* sufix);
 };
 
