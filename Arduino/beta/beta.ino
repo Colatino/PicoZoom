@@ -601,6 +601,7 @@ void setup() {
 
   Wire.setSDA(0);
   Wire.setSCL(1);
+  Wire.begin();
 
   pinMode(LED_BUILTIN, OUTPUT);
 
