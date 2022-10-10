@@ -46,7 +46,7 @@ struct Patch {
 int switch_pins[] = { 5, 6, 7, 8, 9 };
 FootSwitch footswitch[NUM_PEDALS];
 
-int buses[] = { 7, 5, 4, 3, 2 };
+int buses[] = { 6, 5, 4, 3, 2 };
 Oled oleds[NUM_PEDALS];
 
 Patch current_patch;
@@ -611,11 +611,13 @@ void setup() {
   for (int i = 0; i < NUM_PEDALS; i++) {
     oleds[i].begin(buses[i]);
     oleds[i].clear();
-    oleds[i].draw_effect("Bypass", true);
+    //oleds[i].draw_tempo(i,"");
+    oleds[i].draw_effect("Bypass", true); 
     oleds[i].draw();
+    delay(100);
   }
 
-  Serial.print("Start core1...");
+  Serial.println("Start core1...");
   init_core1 = true;
 }
 
@@ -632,7 +634,7 @@ void setup1() {
   while (!init_core1) {
     //wait for core0 to initialize
   }
-  Serial.print("setup1...");
+  Serial.println("setup1...");
   pio_usb_configuration_t pio_cfg = PIO_USB_DEFAULT_CONFIG;
   pio_cfg.pin_dp = HOST_PIN_DP;
   USBHost.configure_pio_usb(1, &pio_cfg);

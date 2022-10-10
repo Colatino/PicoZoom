@@ -42,11 +42,11 @@ struct Patch {
   Effect effects[5];
 };
 
-#define NUM_PEDALS 1
-int switch_pins[] = { 5 };
+#define NUM_PEDALS 5
+int switch_pins[] = { 5, 6, 7, 8, 9 };
 FootSwitch footswitch[NUM_PEDALS];
 
-int buses;
+int buses[] = { 6, 5, 4, 3, 2 };
 Oled oleds[NUM_PEDALS];
 
 Patch current_patch;

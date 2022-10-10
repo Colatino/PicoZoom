@@ -11,8 +11,7 @@ void Oled::begin() {
 void Oled::begin(int bus) {
   _bus = bus;
   Serial.printf("Starting oled on bus %d\r\n",bus);
-  if (TCA9548A)
-    Oled::select_bus();
+  //Oled::select_bus();
 
   if(!_display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)){
     Serial.printf("Failed to initialize oled on bus %d\r\n",bus);
@@ -21,6 +20,7 @@ void Oled::begin(int bus) {
 
 void Oled::select_bus() {
   if (TCA9548A) {
+    //Serial.printf("Selecting bus %d\r\n",_bus);
     Wire.beginTransmission(0x70);  // TCA9548A address is 0x70
     Wire.write(1 << _bus);         // send byte to select bus
     Wire.endTransmission();
