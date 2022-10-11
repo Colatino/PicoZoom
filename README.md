@@ -19,7 +19,7 @@ This project makes use of the following libraries:
 
 Copy the custom [Adafruit_TinyUSB_Arduino](https://github.com/Colatino/PicoZoom/tree/main/lib/Adafruit_TinyUSB_Library) library to you Arduino/libraries folder, be careful if you already have the original one installed as it will be overwritten.
 
-You might want to change these lines to match your setup:
+Open the *.ino file and change whatever lines you need, you might want to change these lines to match your setup:
 ```cpp
 #define NUM_PEDALS 5 // Number of switches and screens - for now each switch has to be linked to an oled screen
 int switch_pins[] = { 5, 6, 7, 8, 9 }; // GPIO pins on the pico the switches are attached to 
