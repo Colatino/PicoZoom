@@ -1,3 +1,29 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2022 André Colatino (https://github.com/Colatino/picozoom)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * This file is part of the PicoZoom project.
+ */
+
 #include <MIDI.h>
 // pio-usb is required for rp2040 host
 #include "pio_usb.h"
@@ -9,43 +35,41 @@
 Adafruit_USBH_Host USBHost;
 
 #include "oled.h"
-
 #include "g1xfour.h"
-
 #include "footswitch.h"
 
 // holding device descriptor
 tusb_desc_device_t desc_device;
+
 static uint8_t midi_dev_addr = 0;
-static bool cloned = false;
 static bool device_mounted = false;
 static bool init_core1 = false;
-String manufacturer, product;
+//String manufacturer, product;
 
 static bool sysex_complete = false;
 
 uint8_t whoareyou[] = { 0x7e, 0x00, 0x06, 0x01 };
-uint8_t editoron[] = { 0x52, 0x00, 0x6e, 0x50 };
-uint8_t editoroff[] = { 0x52, 0x00, 0x6e, 0x51 };
-uint8_t patch_download_current[] = { 0x52, 0x00, 0x6e, 0x29 };
-uint8_t toggle_effect[] = { 0x52, 0x00, 0x6E, 0x64, 0x03, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00 };
-uint8_t set_param[] = { 0x52, 0x00, 0x6E, 0x64, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+uint8_t editoron[] = { 0x52, 0x00, PEDAL_ID, 0x50 };
+uint8_t editoroff[] = { 0x52, 0x00, PEDAL_ID, 0x51 };
+uint8_t patch_download_current[] = { 0x52, 0x00, PEDAL_ID, 0x29 };
+uint8_t toggle_effect[] = { 0x52, 0x00, PEDAL_ID, 0x64, 0x03, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00 };
+uint8_t set_param[] = { 0x52, 0x00, PEDAL_ID, 0x64, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 int sequence = 0;
+
 
 struct Patch {
   uint8_t cur_slot = 0;
   uint8_t n_effects = 0;
-  uint8_t slots[5];
-  bool states[5];
-  bool delay[5];
-  bool xpedal[5];
-  Effect effects[5];
+  uint8_t slots[NUM_SLOTS];
+  bool states[NUM_SLOTS];
+  bool delay[NUM_SLOTS];
+  bool xpedal[NUM_SLOTS];
+  Effect effects[NUM_SLOTS];
 };
 
-#define NUM_PEDALS 5 // Number of switches and screens - for now each switch has to be linked to an oled screen
+// Number of switches and screens - for now each switch has to be linked to an oled screen
 int switch_pins[] = { 5, 6, 7, 8, 9 }; // GPIO pins on the pico the switches are attached to 
 FootSwitch footswitch[NUM_PEDALS];
-
 int buses[] = { 7, 6, 5, 4, 3 }; // Buses on the TCA9548A the oled screens are attached to
 Oled oleds[NUM_PEDALS];
 
@@ -170,6 +194,7 @@ bool handle_identification() {
   return false;
 }
 
+// Lookup the sysex for a specific entry position
 int find_section_index(const char* section) {
   for (int i = 0; i < unpacked.size; i++) {
     if (unpacked.message[i] == section[0] && unpacked.message[i + 1] == section[1] && unpacked.message[i + 2] == section[2] && unpacked.message[i + 3] == section[3]) {
@@ -179,6 +204,7 @@ int find_section_index(const char* section) {
   return -1;
 }
 
+// Decode the sysex 7 to 8 bits
 bool unpack(int start_byte) {
   Sysex tounpack;
   for (int i = start_byte; i < sysex_message.size; i++) {
@@ -192,6 +218,7 @@ bool unpack(int start_byte) {
   }
 }
 
+// Parse patch data
 void parse_patch() {
   // Check if it is a Patch message (look PTCF at start)
   if (find_section_index("PTCF") > -1) {
@@ -262,6 +289,7 @@ void set_effect_toggled(uint8_t fxslot, uint8_t param, bool state) {
   }
 }
 
+// Parse SysEx messages
 void parse_sysex() {
   for (int i = 0; i < sysex_message.size; i++) {
     //Serial.printf("%x ", sysex_message.message[i]);
@@ -276,29 +304,6 @@ void parse_sysex() {
       if (sysex_message.message[6] < 9) {
         //Change in fx parameter
         set_effect_toggled(sysex_message.message[6], sysex_message.message[7], sysex_message.message[8]);
-        // uint8_t fxindex = 0;
-        // for (int i = 0; i < current_patch.n_effects; i++) {
-        //   if (current_patch.slots[i] == fxslot) {
-        //     fxindex = i;
-        //     break;
-        //   }
-        // }
-        // uint8_t param = sysex_message.message[7];
-        // if (param == 0) {
-        //   // Toggled states
-        //   current_patch.states[fxindex] = sysex_message.message[8];
-        //   oleds[fxindex].clear();
-        //   oleds[fxindex].draw_effect(current_patch.effects[fxindex].fxname, current_patch.states[fxindex]);
-        //   oleds[fxindex].draw();
-        // } else if (param == 1) {
-        //   // Don't know what it is, better refresh patch
-        //   // Patch/chain updated - better refresh
-        //   core0_task = CURRENT_PATCH_REQUEST;
-        // } else {
-        //   // Changed parameter - ignore for now
-        //   param -= 2;
-        //   //Serial.printf("Changed value of parameter %s\r\n", current_patch.effects[fxindex].params[param].parname);
-        // }
       } else if (sysex_message.message[6] == 0x09) {
         //Changed patch name - ignore for now
       } else if (sysex_message.message[6] == 0x0a) {
@@ -336,6 +341,7 @@ void parse_sysex() {
   }
 }
 
+// Interrupt routine
 void isr() {
   unsigned long aux_time = millis();
   for (int i = 0; i < NUM_PEDALS; i++) {
@@ -343,6 +349,7 @@ void isr() {
   }
 }
 
+// Handles footswitch presses and states
 void handle_footswitch_states_and_tasks() {
   for (int i = 0; i < NUM_PEDALS; i++) {
     foot_switch_state_t temp_state = footswitch[i].task();
@@ -464,6 +471,7 @@ void handle_footswitch_states_and_tasks() {
   }
 }
 
+// Handle core0
 void handle_core0_states_and_tasks() {
   //Waiting for other core tasks to complete
   if (core0_state == WAITING) {
@@ -605,14 +613,13 @@ void setup() {
 
   pinMode(LED_BUILTIN, OUTPUT);
 
-  // Set Pins and ISRs for footswitches
+  // Set Pins and ISRs for footswitches and initialize screens
   for (int i = 0; i < NUM_PEDALS; i++) {
     footswitch[i].begin(switch_pins[i], 250);
     attachInterrupt(digitalPinToInterrupt(switch_pins[i]), isr, FALLING);
 
     oleds[i].begin(buses[i]);
     oleds[i].clear();
-    // oleds[i].draw_tempo(i, "");
     oleds[i].draw_effect("Bypass", true);
     oleds[i].draw();
   }
@@ -784,7 +791,6 @@ void tuh_umount_cb(uint8_t daddr) {
   digitalWrite(LED_BUILTIN, LOW);
   midi_dev_addr = 0;
   usb_state = DISCONNECTED;
-  cloned = false;
   device_mounted = false;
   core0_state = IDLE;
   core0_task = NONE;
@@ -800,6 +806,7 @@ void tuh_umount_cb(uint8_t daddr) {
   //Serial.println("device disconnected");
 }
 
+// Sends SysEx messages
 void send_sysex(uint8_t* message, int size) {
   size += 2;
   uint8_t new_message[size];
@@ -857,6 +864,7 @@ void send_sysex(uint8_t* message, int size) {
   sysex_complete = true;
 }
 
+// Handles received SysEx message
 void handle_sysex_rx_cb(uint8_t* packet, uint8_t cin) {
   if (cin == 4) {
     if (sysex_message.status == EMPTY) {
@@ -885,13 +893,16 @@ void handle_sysex_rx_cb(uint8_t* packet, uint8_t cin) {
 
 void handle_cc_rx_cb() {
   // //Serial.println("CC received");
+  // Do nothing
 }
 
 void handle_pc_rx_cb() {
   // //Serial.println("PC received");
+  // Possibly changed the current patch
   pc_message.status = COMPLETE;
 }
 
+// Midi received callback
 void tuh_midi_rx_cb(uint8_t dev_addr, uint32_t num_packets) {
   if (midi_dev_addr == dev_addr) {
     int i = 1;
@@ -914,6 +925,7 @@ void tuh_midi_rx_cb(uint8_t dev_addr, uint32_t num_packets) {
   }
 }
 
+// Midi sent callback
 void tuh_midi_tx_cb(uint8_t dev_addr) {
   (void)dev_addr;
 }
