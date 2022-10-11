@@ -42,11 +42,11 @@ struct Patch {
   Effect effects[5];
 };
 
-#define NUM_PEDALS 5
-int switch_pins[] = { 5, 6, 7, 8, 9 };
+#define NUM_PEDALS 5 // Number of switches and screens - for now each switch has to be linked to an oled screen
+int switch_pins[] = { 5, 6, 7, 8, 9 }; // GPIO pins on the pico the switches are attached to 
 FootSwitch footswitch[NUM_PEDALS];
 
-int buses[] = { 7, 6, 5, 4, 3 };
+int buses[] = { 7, 6, 5, 4, 3 }; // Buses on the TCA9548A the oled screens are attached to
 Oled oleds[NUM_PEDALS];
 
 Patch current_patch;
