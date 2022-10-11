@@ -57,7 +57,7 @@ I recommend not to use headers but instead solder the jumper wires to the TCA954
 
 After all the connections are made, I recommend that before you assembly the controller, test it with the Pedal as it will be harder to debug later.
 
-If all goes well, just put everything inside the box you chose and you're done!
+If all goes well, just put everything inside the box ([stl/3mf files for 3d printing]()) and you're done!
 
 ## How to use
 
