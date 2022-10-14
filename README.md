@@ -1,4 +1,5 @@
 # PicoZoom
+![Image](https://img.youtube.com/vi/8XPy8AvLA0o/maxresdefault.jpg)
 A MIDI controller for Zoom pedals based on the Raspberry pi Pico.
  
 This project is the microcontroler version of the [one](https://github.com/Colatino/ZeroPedal) I've built with a Raspberry Pi Zero
@@ -80,7 +81,7 @@ To use it you'll have to hold its corresponding footswitch for at least 1 second
 
 The global BPM feature works similarly but will ONLY be enabled when holding on any switch the DOES NOT correspond to a delay effect for 1 second. After activated a message *GLOBAL BPM* will show on the screen, then you just have to press/tap the switch at the desire interval and the controller will calculate the BPMs corresponding to that interval and show it on the screen. When you're satisfied just stop tapping and wait for 3 seconds, the controller will send the measured interval to the pedal and will go back to the normal functions, showing the effect's name again. See the video bellow for a sample of how it works:
 
-[![Tap tempo sample](https://img.youtube.com/vi/VsWXhOvHJVc/maxresdefault.jpg)](https://youtu.be/VsWXhOvHJVc)
+[![Global tempo sample](https://img.youtube.com/vi/VsWXhOvHJVc/maxresdefault.jpg)](https://youtu.be/VsWXhOvHJVc)
 
 ### ROADMAP
 - [x] Ensure USB communications
