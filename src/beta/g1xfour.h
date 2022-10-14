@@ -26,28 +26,11 @@
  
 #ifndef G1XFOUR_H
 #define G1XFOUR_H
-//#include "pedal_model.h"
+#include "effect_model.h"
 
 #define NEFFECTS 149
 #define NUM_SLOTS 5
 #define NUM_PEDALS 5
-
-struct Parameter{
-  bool pedal;
-  int maxval;
-  int defval;
-  int curval=0;
-  char parname[9];
-};
-
-struct Effect{
-  char fxname[10];
-  long id;
-  char filename[17];
-  byte nslots;
-  byte nparam;
-  Parameter params[8];
-};
 
 #define PEDAL_ID 0x6e
 #define N_DELAYS 17
@@ -208,14 +191,5 @@ Effect effects[NEFFECTS]={
 #define N_X_PEDALS 18
 
 long xpedal_ids []= { 184549392, 184549408, 184549424, 184549440, 184549456, 184549472, 184549488, 184549504, 184549520, 184549537, 184549552, 184549569, 184549584, 184549601, 184549616, 184549632, 192938016, 199294960 };
-
-int get_effect_by_id(long id){
-  for(int i=0;i<NEFFECTS;i++){
-    if(effects[i].id==id){
-      return i;
-    }
-  }
-  return -1;
-}
 
 #endif

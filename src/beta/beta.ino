@@ -141,6 +141,15 @@ struct PChange {
 
 Sysex unpacked;
 
+int get_effect_by_id(long id){
+  for(int i=0;i<NEFFECTS;i++){
+    if(effects[i].id==id){
+      return i;
+    }
+  }
+  return -1;
+}
+
 // HELPER FUNCTIONS
 // Send a new task to the other core
 // core0 <-> core1
