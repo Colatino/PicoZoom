@@ -1,4 +1,5 @@
 # PicoZoom
+![Image](https://img.youtube.com/vi/8XPy8AvLA0o/maxresdefault.jpg)
 A MIDI controller for Zoom pedals based on the Raspberry pi Pico.
  
 This project is the microcontroler version of the [one](https://github.com/Colatino/ZeroPedal) I've built with a Raspberry Pi Zero
@@ -19,7 +20,7 @@ This project makes use of the following libraries:
 
 Copy the custom [Adafruit_TinyUSB_Arduino](https://github.com/Colatino/PicoZoom/tree/main/lib/Adafruit_TinyUSB_Library) library to you Arduino/libraries folder, be careful if you already have the original one installed as it will be overwritten.
 
-You might want to change these lines to match your setup:
+Open the *.ino file and change whatever lines you need, you might want to change these lines to match your setup:
 ```cpp
 #define NUM_PEDALS 5 // Number of switches and screens - for now each switch has to be linked to an oled screen
 int switch_pins[] = { 5, 6, 7, 8, 9 }; // GPIO pins on the pico the switches are attached to 
@@ -57,7 +58,7 @@ I recommend not to use headers but instead solder the jumper wires to the TCA954
 
 After all the connections are made, I recommend that before you assembly the controller, test it with the Pedal as it will be harder to debug later.
 
-If all goes well, just put everything inside the box you chose and you're done!
+If all goes well, just put everything inside the box ([stl/3mf files for 3d printing](https://github.com/Colatino/PicoZoom/tree/main/Case)) and you're done!
 
 ## How to use
 
@@ -80,7 +81,7 @@ To use it you'll have to hold its corresponding footswitch for at least 1 second
 
 The global BPM feature works similarly but will ONLY be enabled when holding on any switch the DOES NOT correspond to a delay effect for 1 second. After activated a message *GLOBAL BPM* will show on the screen, then you just have to press/tap the switch at the desire interval and the controller will calculate the BPMs corresponding to that interval and show it on the screen. When you're satisfied just stop tapping and wait for 3 seconds, the controller will send the measured interval to the pedal and will go back to the normal functions, showing the effect's name again. See the video bellow for a sample of how it works:
 
-[![Tap tempo sample](https://img.youtube.com/vi/VsWXhOvHJVc/maxresdefault.jpg)](https://youtu.be/VsWXhOvHJVc)
+[![Global tempo sample](https://img.youtube.com/vi/VsWXhOvHJVc/maxresdefault.jpg)](https://youtu.be/VsWXhOvHJVc)
 
 ### ROADMAP
 - [x] Ensure USB communications
