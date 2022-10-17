@@ -300,13 +300,12 @@ void set_effect_toggled(uint8_t fxslot, uint8_t param, bool state) {
 
 // Parse SysEx messages
 void parse_sysex() {
-  for (int i = 0; i < sysex_message.size; i++) {
-    //Serial.printf("%x ", sysex_message.message[i]);
-  }
+  // for (int i = 0; i < sysex_message.size; i++) {
+  //   Serial.printf("%x ", sysex_message.message[i]);
+  // }
   //Serial.println("");
   sysex_message.status = EMPTY;
   if (sysex_message.message[3] == 0x64) {
-
     if (sysex_message.message[4] == 0x03) {
       // Seems that 5th byte = 1 whem pedal answers
       // Pedal informing of a change in patch/effect parameters
