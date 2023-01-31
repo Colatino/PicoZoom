@@ -26,7 +26,7 @@
  
 #ifndef G3XN_H
 #define G3XN_H
-#include effect_model.h
+#include "effect_model.h"
 
 #define NEFFECTS 158
 #define NUM_SLOTS 7

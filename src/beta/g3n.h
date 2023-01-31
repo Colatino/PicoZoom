@@ -23,9 +23,9 @@
  *
  * This file is part of the PicoZoom project.
  */
- #ifndef G3N_H
+#ifndef G3N_H
 #define G3N_H
-#include effect_model.h
+#include "effect_model.h"
 
 #define NEFFECTS 158
 #define NUM_SLOTS 7

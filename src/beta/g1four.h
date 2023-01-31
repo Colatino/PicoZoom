@@ -25,7 +25,7 @@
  */
 #ifndef G1FOUR_H
 #define G1FOUR_H
-#include effect_model.h
+#include "effect_model.h"
 
 #define NEFFECTS 131
 #define NUM_SLOTS 5

@@ -26,7 +26,7 @@
 
 #ifndef B3N_H
 #define B3N_H
-#include effect_model.h
+#include "effect_model.h"
 
 #define NEFFECTS 104
 #define NUM_SLOTS 7
