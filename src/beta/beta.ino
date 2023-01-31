@@ -34,8 +34,17 @@
 // USB Host object
 Adafruit_USBH_Host USBHost;
 
-#include "oled.h"
+// Uncomment the line that corresponds to your pedal
 #include "g1xfour.h"
+// #include "g1four.h"
+// #include "b1four.h"
+// #include "b1xfour.h"
+// #include "b3n.h"
+// #include "g3n.h"
+// #include "g3xn.h"
+// #include "g5n.h"
+
+#include "oled.h"
 #include "footswitch.h"
 
 // holding device descriptor

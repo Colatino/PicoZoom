@@ -29,9 +29,9 @@
 #include effect_model.h
 
 #define NEFFECTS 104
-#define NUM_SLOTS 
-#define NUM_PEDALS 
-#define PEDAL_ID 
+#define NUM_SLOTS 7
+#define NUM_PEDALS 7
+#define PEDAL_ID 0x4f
 #define N_DELAYS 7
 
 long delay_ids[]={134217760,134217744,134217888,134217824,134217808,134217792,134217776};

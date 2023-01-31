@@ -28,8 +28,8 @@
 #include effect_model.h
 
 #define NEFFECTS 158
-#define NUM_SLOTS 5
-#define NUM_PEDALS 5
+#define NUM_SLOTS 9
+#define NUM_PEDALS 9
 #define PEDAL_ID 0x5b
 
 #define N_DELAYS 17
