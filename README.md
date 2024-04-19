@@ -11,7 +11,7 @@ This project wouldn't be possible without [zoom-zt2](https://github.com/mungewel
 ## HOW TO BUILD ONE
 
 ### CODE
-You'll have to install the [Arduino IDE](https://www.arduino.cc/en/software) and add the [Arduino-pico core](https://github.com/earlephilhower/arduino-pico) to it, follow the [installation instructions](https://arduino-pico.readthedocs.io/en/latest/install.html) on the documentation.
+You'll have to install the [Arduino IDE](https://www.arduino.cc/en/software) and add the [Arduino-pico core](https://github.com/earlephilhower/arduino-pico) to it, follow the [installation instructions](https://arduino-pico.readthedocs.io/en/latest/install.html) on the documentation. Tested with version 2.5, newer versions may not be compatible.
 
 This project makes use of the following libraries:
 - A custom version of [Adafruit_TinyUSB_Arduino](https://github.com/adafruit/Adafruit_TinyUSB_Arduino) based on [rppicomidi's fork](https://github.com/rppicomidi/tinyusb/tree/pio-midihost) of [tinyusb](https://github.com/hathach/tinyusb)
