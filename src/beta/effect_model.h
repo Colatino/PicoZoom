@@ -10,10 +10,15 @@ struct Parameter {
 };
 
 struct Effect {
+  // Name of the effect
   char fxname[10];
+  // ID of the effect
   long id;
+  // Name of the file
   char filename[17];
+  // Number of slots used by the effect
   byte nslots;
+  // Number of parameters
   byte nparam;
   Parameter params[8];
 };

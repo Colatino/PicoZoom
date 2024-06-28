@@ -368,70 +368,76 @@ void isr() {
 
 // Handles footswitch presses and states
 void handle_footswitch_states_and_tasks() {
+  // Iterates for each of the footswitches to get its states
   for (int i = 0; i < NUM_PEDALS; i++) {
+    // Run the task to check which state the footswitch is on (and calculates tempos)
     foot_switch_state_t temp_state = footswitch[i].task();
+    // Gets the correct slot in which the effect is stored on the patch effects chain
     uint8_t slot = current_patch.slots[i];
     ////Serial.println(temp_state);
+    // If state is TAP - prepares for tempo aquisition (tap tempo)
     if (temp_state == TAP) {
+      // If the footswitch is linked to a delay effect change its tempo...
       if (current_patch.delay[i]) {
         oleds[i].clear();
+        // Display informatino on screen for 0,5s
         oleds[i].draw_text("TAP TEMPO");
         oleds[i].draw();
         delay(500);
-      } else {
+      } else { // If there isnt a delay effect linked to this footswitch than will change global tempo
         oleds[i].clear();
+        // Display informatino on screen for 0,5s
         oleds[i].draw_text("GLOBAL BPM");
         oleds[i].draw();
         delay(500);
       }
     } else if (temp_state == HOLD || temp_state == HOLDB) {
+      // Is aquiring tempos
       unsigned long new_tempo;
+      // If tempo was calculated
       if (footswitch[i].got_tempo()) {
         new_tempo = footswitch[i].get_tempo();
         // Send tempos to display
         oleds[i].clear();
+        // If is a delay
         if (current_patch.delay[i]) {
-          // Draw delay tempo
+          // Draw delay tempo in ms
           oleds[i].draw_tempo(new_tempo, "ms");
         } else {
-          // Draw  global BPM
-          int bpm = 60000 / new_tempo;
-          bpm = bpm < 40 ? 40 : (bpm > 250 ? 250 : bpm);
+          // Draw  global BPM          
+          int bpm = 60000 / new_tempo; // converts ms to bpm
+          bpm = bpm < 40 ? 40 : (bpm > 250 ? 250 : bpm); // constrain global tempo to the 40 - 250 bpm range
           oleds[i].draw_tempo(bpm, "bpm");
         }
         oleds[i].draw();
         //Serial.println(new_tempo);
       }
-    } else if (temp_state == TOGGLE) {
-      uint8_t state = current_patch.states[i];
-      //Serial.printf("Toggle effect %s on slot %d: %s\r\n", current_patch.effects[i].fxname, slot, state ? "off\0" : "on\0");
-
-      toggle_effect[6] = slot;
-      toggle_effect[9] = !state;
-      core0_state = IDLE;
-      core0_task = TOGGLE_EFFECT_REQUEST;
     } else if (temp_state == TEMPO || temp_state == TEMPOB) {
-
+      // Stores calculated tempo
       int tempo = footswitch[i].get_tempo();
       //Serial.println(tempo);
       if (tempo > 0) {
         // If footswitch is linked to a delay
         if (current_patch.delay[i]) {
+          // Divides tempo value in two bytes
           uint8_t tempoLow = (tempo - 10) % 128;
           uint8_t tempoHigh = (tempo - 10) / 128;
           // Set delay time on effect
+          // Prepare parameter message
           set_param[6] = slot;
           //set_param[7] = j;
-          set_param[8] = tempoLow;
-          set_param[9] = tempoHigh;
+          set_param[8] = tempoLow; // low byte
+          set_param[9] = tempoHigh; // high byte
 
           for (int j = 0; j < current_patch.effects[i].nparam; j++) {
             const char* pname = current_patch.effects[i].params[j].parname;
+            // Check if tempo was finished calculating and if there is a 1 or 2 parameters delay
             if (temp_state == TEMPO && strcmp(pname, "Time") == 0 || strcmp(pname, "TimeA") == 0) {
               //Serial.printf("Set delay time to %d ms high: %02x low:%02x\r\n", tempo, tempoHigh, tempoLow);
-              set_param[7] = j + 2;
+              set_param[7] = j + 2; // Position of the parameter (offset = 2)
               // In case it is a dual delay
               if (strcmp(current_patch.effects[i].params[j].parname, "TimeA") == 0)
+                // Starts calculating the second tempo
                 footswitch[i].set_tempo_b();
               // Send tempos to display
               oleds[i].clear();
@@ -445,7 +451,7 @@ void handle_footswitch_states_and_tasks() {
             }
           }
           core0_state = IDLE;
-          core0_task = SET_PARAM_REQUEST;
+          core0_task = SET_PARAM_REQUEST; // Sets task for next core loop
         } else {
           // Set global tempo
 
@@ -456,8 +462,9 @@ void handle_footswitch_states_and_tasks() {
             tempo = 1500;
           }
           uint8_t bpm = 60000 / tempo;
-          uint8_t bpmLow = bpm % 128;
-          uint8_t bpmHigh = bpm / 128;
+          uint8_t bpmLow = bpm % 128; // low byte
+          uint8_t bpmHigh = bpm / 128; // high byte
+          // Sets the bytes for the global tempo parameter
           set_param[6] = 0x0a;
           set_param[7] = 0x02;
           set_param[8] = bpmLow;
@@ -466,7 +473,7 @@ void handle_footswitch_states_and_tasks() {
           oleds[i].draw_tempo(bpm, "bpm");
           oleds[i].draw();
           core0_state = IDLE;
-          core0_task = SET_PARAM_REQUEST;
+          core0_task = SET_PARAM_REQUEST; // Sets task for next core loop
         }
       } else {
         core0_state = IDLE;
@@ -484,6 +491,14 @@ void handle_footswitch_states_and_tasks() {
           }
         }
       }
+    }else if (temp_state == TOGGLE) {
+      uint8_t state = current_patch.states[i];
+      //Serial.printf("Toggle effect %s on slot %d: %s\r\n", current_patch.effects[i].fxname, slot, state ? "off\0" : "on\0");
+
+      toggle_effect[6] = slot;
+      toggle_effect[9] = !state;
+      core0_state = IDLE;
+      core0_task = TOGGLE_EFFECT_REQUEST;
     }
   }
 }
@@ -644,11 +659,13 @@ void setup() {
 }
 
 void loop() {
+  // Handles switch presses, calculations and screens
   handle_core0_states_and_tasks();
 }
 
 //--------------------------------------------------------------------+
 // CORE 1 FUNCTIONS - HANDLE COMMUNICATIONS
+// TRY NOT TO CHANGE ANYTHING FROM HERE
 //--------------------------------------------------------------------+
 // core1's setup
 void setup1() {

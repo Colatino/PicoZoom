@@ -29,10 +29,14 @@
 #include "effect_model.h"
 
 #define NEFFECTS 149
+// Maximum effects in chain
 #define NUM_SLOTS 5
 #define NUM_PEDALS 5
 
+// ID of the pedal (for MIDI sysex messages)
 #define PEDAL_ID 0x6e
+
+// Ids of the all the delay effects
 #define N_DELAYS 17
 long delay_ids[] = { 134217745, 134217761, 134217776, 134217793, 134217808, 134217857, 134217872, 134217889, 134217905, 134217921, 134217937, 134217953, 134217969, 134217985, 134218001, 134218017,184549537 };
 
@@ -190,6 +194,7 @@ Effect effects[NEFFECTS]={
 
 #define N_X_PEDALS 18
 
+// Ids of the effects that uses expression pedal
 long xpedal_ids []= { 184549392, 184549408, 184549424, 184549440, 184549456, 184549472, 184549488, 184549504, 184549520, 184549537, 184549552, 184549569, 184549584, 184549601, 184549616, 184549632, 192938016, 199294960 };
 
 #endif
