@@ -201,9 +201,11 @@ bool handle_identification() {
     } else if (temp == 0x10) {
       //Serial.println("GCE-3 is currently unsupported");
     } else if (temp == 0x11) {
-      //Serial.println("A1Four is currently unsupported");
+      Serial.println("This is a A1Four");
+      return true;
     } else if (temp == 0x12) {
-      //Serial.println("A1XFour is currently unsupported");
+      Serial.println("This is a A1XFour");
+      return true;
     } else {
       //Serial.println("Unidentified pedal");
     }
